@@ -1,0 +1,9 @@
+{
+  "name": "rememberall",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": [
+    "./backend",
+    "./webapp"
+  ]
+}
