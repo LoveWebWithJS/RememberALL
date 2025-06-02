@@ -5,11 +5,14 @@
   "scripts": {
     "dev": "ts-node-dev --rs ./src/index.ts",
     "build": "rimraf ./dist && tsc --build ./tsconfig.json",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "types": "tsc --noEmit --project ./tsconfig.json"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
     "@types/node": "^20.5.0",
+    "cors": "^2.8.5",
     "prettier": "^3.0.2",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
