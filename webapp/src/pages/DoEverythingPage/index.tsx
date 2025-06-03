@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { trpc } from '../../lib/trpc';
+import { getSettingsPageRoute } from '../../lib/routes';
 
 export const DoEverythingPage = () => {
   const { data, error, isLoading, isFetching, isError } = trpc.getPong.useQuery();
@@ -13,6 +15,10 @@ export const DoEverythingPage = () => {
     <div>
       <h1>DoEverythingPage!!!</h1>
       <span>{data?.pong}</span>
+      <br />
+      <span>
+        <Link to={getSettingsPageRoute()}>Settings</Link>
+      </span>
     </div>
   );
 };

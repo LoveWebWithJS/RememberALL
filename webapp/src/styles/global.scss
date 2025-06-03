@@ -1,0 +1,17 @@
+@import './_reset-css.scss';
+@import './vars';
+
+body {
+  background-color: $extraLightGreen;
+  font-family: $fontFamily;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}

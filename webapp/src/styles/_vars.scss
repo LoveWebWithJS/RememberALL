@@ -1,0 +1,19 @@
+// ! Green colors palitre
+$extraLightGreen: #e0ffe0;
+$lightGreen: #ccffcc;
+$mediumGreen: #99cc99;
+$darkGreen: #669966;
+$extraDarkGreen: #003300;
+
+// ! Text
+// ExtraLight 200, ExtraLight 200 italic, Regular 400, Regular 400 Italic, Medium 500, Medium 500 Italic, SemiBold 600,
+// SemiBold 600 Italic, ExtraBold 800, Black 900 only
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,200;0,400;0,500;0,600;0,800;0,900;1,200;1,400;1,500;1,600&display=swap');
+$fontFamily: 'Montserrat Alternates', sans-serif;
+$defaultFontSize: 24px;
+$defaultLineHight: 1.2;
+$defaultTextColor: black;
+
+// ! Borders
+$defaultBorder: 2px solid black;
+$defaultCornerRadius: 15px;
