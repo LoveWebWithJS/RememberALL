@@ -1,6 +1,24 @@
 @import '../../styles/vars.scss';
 @import '../../styles/mixins.scss';
 
-.title {
-  @include h1;
+.layout {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 26.71875% 73.28125%;
+  grid-template-rows: 70px 1fr 70px;
+  grid-template-areas: 'nav header' 'navigaion outlet' 'navigation actionBar';
+}
+.header {
+  grid-area: header;
+}
+.navigation {
+  grid-area: nav;
+}
+
+.outlet {
+  grid-area: outlet;
+}
+
+.actionBar {
+  grid-area: actionBar;
 }

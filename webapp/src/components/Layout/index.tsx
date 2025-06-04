@@ -1,6 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 import { getDoEverythingPageRoute } from '../../lib/routes';
-// import { Button } from '../Button';
+import { Button } from '../Button';
 import css from './index.module.scss';
 
 export const Layout = () => {
@@ -14,24 +14,23 @@ export const Layout = () => {
       <nav className={css.navigation}>
         <div className={css.filterBtns}>
           <div className={css.topBtns}>
-            {/* <Button title='Сегодня'></Button> */}
-            <button className={css.today}>Сегодня</button>
-            <button className={css.tomorrow}>Завтра</button>
-            <button className={css.week}>На неделе</button>
+            <Button name='today' role='filter'></Button>
+            <Button name='tomorrow' role='filter'></Button>
+            <Button name='week' role='filter'></Button>
           </div>
           <div className={css.bottomBtns}>
-            <button className={css.month}>В этот месяц</button>
-            <button className={css.anyTime}>Хз когда</button>
+            <Button name='month' role='filter'></Button>
+            <Button name='anyTime' role='filter'></Button>
           </div>
         </div>
         <div className={css.actionBtns}>
-          <button className={css.settings}>Настройки</button>
-          <button className={css.auth}>Войти</button>
-          <button className={css.registration}>Зарегаться</button>
+          <Button name='settings' role='settings'></Button>
+          <Button name='auth' role='auth'></Button>
+          <Button name='registration' role='reg'></Button>
         </div>
       </nav>
       <div className={css.actionBar}>
-        <button className={css.newTask}>+ Задача</button>
+        <Button name='addTask' role='addNewTask'></Button>
         <span className={css.author}>Made by Melnikovsky with &lt;3</span>
       </div>
       <div className={css.outlet}>

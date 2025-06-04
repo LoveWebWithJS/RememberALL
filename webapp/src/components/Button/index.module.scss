@@ -1,2 +1,23 @@
 @import '../../styles/vars.scss';
 @import '../../styles/mixins.scss';
+
+.button {
+  font-family: $fontFamily;
+  background-color: $lightGreen;
+  border: none;
+  border-radius: $defaultCornerRadius;
+  width: 432px;
+  height: 69px;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.dark {
+  background-color: $mediumGreen;
+}
+.extraDark {
+  background-color: $darkGreen;
+  color: white;
+  height: 60px;
+  width: 250px;
+}

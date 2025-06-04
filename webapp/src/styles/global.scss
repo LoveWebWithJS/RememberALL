@@ -1,9 +1,18 @@
 @import './_reset-css.scss';
 @import './vars';
 
+html {
+  min-height: 100vh;
+}
+
 body {
   background-color: $extraLightGreen;
   font-family: $fontFamily;
+  height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 *,
