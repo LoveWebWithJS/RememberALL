@@ -1,1 +1,7 @@
 @import './vars';
+
+@mixin h1 {
+  font-family: $fontFamily;
+  font-size: 2rem;
+  font-weight: 900;
+}
