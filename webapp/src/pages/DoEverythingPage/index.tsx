@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { trpc } from '../../lib/trpc';
-import { getSettingsPageRoute } from '../../lib/routes';
+import css from './index.module.scss';
+// import { getSettingsPageRoute } from '../../lib/routes';
 
 export const DoEverythingPage = () => {
-  const { data, error, isLoading, isFetching, isError } = trpc.getPong.useQuery();
+  const { error, isLoading, isFetching, isError } = trpc.getPong.useQuery();
   if (isLoading || isFetching) {
     return <span>Loading...</span>;
   }
@@ -11,14 +12,94 @@ export const DoEverythingPage = () => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+
   return (
-    <div>
-      <h1>DoEverythingPage!!!</h1>
-      <span>{data?.pong}</span>
-      <br />
-      <span>
-        <Link to={getSettingsPageRoute()}>Settings</Link>
-      </span>
+    <div className={css.DoEverythingPage}>
+      <div className={css.subtitleWrapper}>
+        <h2 className={css.subtitle}>На сегодня у нас:</h2>
+      </div>
+      <div className={css.taskWrapper}>
+        <ul className={css.tasks}>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+          <li className={css.task}>
+            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

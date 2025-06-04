@@ -28,10 +28,10 @@ export const Button: React.FC<ButtonProps> = ({ name, role }) => {
       return <button className={`${css.button} ${css.dark}`}>Настройки</button>;
       break;
     case 'auth':
-      return <button className={`${css.button} ${css.dark}`}>Войти</button>;
+      return <button className={`${css.button} ${css.dark} ${css.auth}`}>Войти</button>;
       break;
     case 'registration':
-      return <button className={`${css.button} ${css.dark}`}>Зарегаться</button>;
+      return <button className={`${css.button} ${css.dark} ${css.reg}`}>Зарегаться</button>;
       break;
     case 'addTask':
       return <button className={`${css.button} ${css.extraDark}`}>+ Задача</button>;

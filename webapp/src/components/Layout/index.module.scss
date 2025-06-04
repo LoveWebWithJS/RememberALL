@@ -3,22 +3,99 @@
 
 .layout {
   height: 100vh;
+  max-height: 100vh;
   display: grid;
   grid-template-columns: 26.71875% 73.28125%;
   grid-template-rows: 70px 1fr 70px;
-  grid-template-areas: 'nav header' 'navigaion outlet' 'navigation actionBar';
-}
-.header {
-  grid-area: header;
-}
-.navigation {
-  grid-area: nav;
-}
+  grid-template-areas: 'nav header' 'nav outlet' 'nav actionBar';
+  .header {
+    grid-area: header;
+    background-color: $lightGreen;
+    display: flex;
+    align-items: center;
+    padding-left: 33px;
+    margin-left: -15px;
+    border: $defaultBorder;
+    border-radius: 0 0 $defaultCornerRadius 0;
+    h1 {
+      @include h1;
+    }
+  }
+  .navigation {
+    grid-area: nav;
+    background-color: $mediumGreen;
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    flex-direction: column;
+    min-width: 350px;
+    border-radius: 0 $defaultCornerRadius $defaultCornerRadius 0;
+    border: $defaultBorder;
+    max-height: 100vh;
 
-.outlet {
-  grid-area: outlet;
-}
+    z-index: 5;
+    .filterBtns {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 70.56074766%;
+      .topBtns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        row-gap: 10px;
+        padding-top: 15px;
+      }
+      .bottomBtns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        row-gap: 10px;
+        padding-bottom: 15px;
+      }
+    }
 
-.actionBar {
-  grid-area: actionBar;
+    .actionBtns {
+      width: 100%;
+      background-color: $darkGreen;
+      height: 29.439252336448598130841121495327%;
+      min-height: 240px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      column-gap: 14px;
+      row-gap: 19px;
+      flex-wrap: wrap;
+      align-content: center;
+      border-radius: $defaultCornerRadius $defaultCornerRadius $defaultCornerRadius 0;
+      border-top: $defaultBorder;
+    }
+  }
+  .outlet {
+    grid-area: outlet;
+    max-height: 100vh;
+  }
+  .actionBar {
+    z-index: 3;
+    grid-area: actionBar;
+    background-color: $mediumGreen;
+    display: flex;
+    align-items: center;
+    padding-left: 33px;
+    margin-left: -15px;
+    border-radius: 0 $defaultCornerRadius 0 0;
+    border: $defaultBorder;
+    .author {
+      position: absolute;
+      bottom: 1px;
+      right: 0;
+    }
+  }
 }

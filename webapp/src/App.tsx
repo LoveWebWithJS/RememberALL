@@ -5,6 +5,7 @@ import { SettingsPage } from './pages/SettingsPage';
 import { getDoEverythingPageRoute, getSettingsPageRoute } from './lib/routes';
 import { Layout } from './components/Layout';
 import './styles/global.scss';
+// import { RememberEverythingPage } from './pages/RememberEverythingPage';
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
         <Routes>
           <Route element={<Layout />}>
             <Route path={getDoEverythingPageRoute()} element={<DoEverythingPage />} />
+            {/* <Route path={getRememberEverythingPageRoute()} element={<RememberEverythingPage />} /> */}
             <Route path={getSettingsPageRoute()} element={<SettingsPage />} />
           </Route>
         </Routes>

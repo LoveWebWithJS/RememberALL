@@ -1,0 +1,58 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.DoEverythingPage {
+  max-height: 768px;
+  // overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: $darkGreen $extraLightGreen;
+  .subtitleWrapper {
+    display: flex;
+    align-items: center;
+    height: 59px;
+    width: fit-content;
+    padding: 15px 18px 15px 18px;
+    border-right: $defaultBorder;
+    border-bottom: $defaultBorder;
+    border-radius: 0 0 $defaultCornerRadius 0;
+    background-color: $lightGreen;
+    margin-bottom: 8px;
+    .subtitle {
+      font-size: $defaultFontSize;
+      font-weight: 600;
+    }
+  }
+  .taskWrapper {
+    margin: 0 16px 0 18px;
+    max-height: 100vh;
+    .tasks {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 8px;
+      max-height: 83.64%;
+      .task {
+        width: 100%;
+        min-height: 57px;
+        padding: 14px 5px 14px 0;
+        display: flex;
+        align-items: center;
+        background-color: $lightGreen;
+        &::before {
+          content: '𒊹';
+          margin: 0 7px 0 11px;
+          height: 14px;
+          width: 14px;
+          color: $mediumGreen;
+        }
+
+        .taskText {
+          font-size: $defaultFontSize;
+        }
+      }
+    }
+    // &::after {
+    //   content: 'ЛКМ - выполнено | ПКМ - удалить';
+    // }
+  }
+}

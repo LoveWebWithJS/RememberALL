@@ -4,4 +4,9 @@
   font-family: $fontFamily;
   font-size: 2rem;
   font-weight: 900;
+  color: black;
+  a {
+    text-decoration: underline;
+    color: black;
+  }
 }
