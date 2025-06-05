@@ -7,7 +7,7 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ name, role }) => {
-  console.log(name, role);
+  console.log(role);
   switch (name) {
     case 'today':
       return <button className={css.button}>Сегодня</button>;

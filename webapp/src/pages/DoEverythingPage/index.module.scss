@@ -23,7 +23,7 @@
       font-weight: 600;
     }
   }
-  .taskWrapper {
+  .tasksWrapper {
     margin: 0 16px 0 18px;
     max-height: 100vh;
     .tasks {
@@ -31,25 +31,6 @@
       flex-wrap: wrap;
       row-gap: 8px;
       max-height: 83.64%;
-      .task {
-        width: 100%;
-        min-height: 57px;
-        padding: 14px 5px 14px 0;
-        display: flex;
-        align-items: center;
-        background-color: $lightGreen;
-        &::before {
-          content: '𒊹';
-          margin: 0 7px 0 11px;
-          height: 14px;
-          width: 14px;
-          color: $mediumGreen;
-        }
-
-        .taskText {
-          font-size: $defaultFontSize;
-        }
-      }
     }
     // &::after {
     //   content: 'ЛКМ - выполнено | ПКМ - удалить';

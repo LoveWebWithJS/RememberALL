@@ -1,10 +1,16 @@
 // import { Link } from 'react-router-dom';
 import { trpc } from '../../lib/trpc';
 import css from './index.module.scss';
-// import { getSettingsPageRoute } from '../../lib/routes';
+import { Task } from '../../components/Task';
 
 export const DoEverythingPage = () => {
-  const { error, isLoading, isFetching, isError } = trpc.getPong.useQuery();
+  const result = trpc.getTodayTasks.useQuery();
+  const { isLoading, isFetching, isError, error } = result;
+
+  if (result.data === undefined) {
+    console.error('Requaired data is undefined');
+    return <p>Requaired data is undefined. Something went wrong</p>;
+  }
   if (isLoading || isFetching) {
     return <span>Loading...</span>;
   }
@@ -18,86 +24,11 @@ export const DoEverythingPage = () => {
       <div className={css.subtitleWrapper}>
         <h2 className={css.subtitle}>На сегодня у нас:</h2>
       </div>
-      <div className={css.taskWrapper}>
+      <div className={css.tasksWrapper}>
         <ul className={css.tasks}>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
-          <li className={css.task}>
-            <span className={css.taskText}>Съешь ещё этих мягких французских булок да выпей чаю.</span>
-          </li>
+          {result.data.map((task, i) => (
+            <Task key={task.id} result={result.data[i]} />
+          ))}
         </ul>
       </div>
     </div>
