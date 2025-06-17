@@ -1,5 +1,7 @@
 import React from 'react';
 import css from './index.module.scss';
+import { getAddNewTaskRoute } from '../../lib/routes';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
   name: string;
@@ -7,7 +9,6 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ name, role }) => {
-  console.log(role);
   switch (name) {
     case 'today':
       return <button className={css.button}>Сегодня</button>;
@@ -34,7 +35,7 @@ export const Button: React.FC<ButtonProps> = ({ name, role }) => {
       return <button className={`${css.button} ${css.dark} ${css.reg}`}>Зарегаться</button>;
       break;
     case 'addTask':
-      return <button className={`${css.button} ${css.extraDark}`}>+ Задача</button>;
+      return <Link to={getAddNewTaskRoute()}><button className={`${css.button} ${css.extraDark}`}>+ Задача</button></Link>
       break;
     default:
       return <button className={css.button}>Кнопка</button>;
