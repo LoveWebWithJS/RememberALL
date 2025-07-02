@@ -1,48 +1,48 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import css from './index.module.scss';
-import { getAddNewTaskRoute } from '../../lib/routes';
-import { Link } from 'react-router-dom';
-
 interface ButtonProps {
-  name: string;
-  role?: string;
+  onClick?: () => void; //use function expression without returning value or you can use types union
+  text?: string;
+  width?: string;
+  btnStyle?: string;
+  children?: ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({ name, role }) => {
-  switch (name) {
-    case 'today':
-      return <button className={css.button}>Сегодня</button>;
-      break;
-    case 'tomorrow':
-      return <button className={css.button}>Завтра</button>;
-      break;
-    case 'week':
-      return <button className={css.button}>На неделе</button>;
-      break;
-    case 'month':
-      return <button className={css.button}>В этот месяц</button>;
-      break;
-    case 'anyTime':
-      return <button className={css.button}>Хз когда</button>;
-      break;
-    case 'settings':
-      return <button className={`${css.button} ${css.dark}`}>Настройки</button>;
-      break;
-    case 'auth':
-      return <button className={`${css.button} ${css.dark} ${css.auth}`}>Войти</button>;
-      break;
-    case 'registration':
-      return <button className={`${css.button} ${css.dark} ${css.reg}`}>Зарегаться</button>;
-      break;
-    case 'addTask':
-      return <Link to={getAddNewTaskRoute()}><button className={`${css.button} ${css.extraDark}`}>+ Задача</button></Link>
-      break;
-    default:
-      return <button className={css.button}>Кнопка</button>;
-      break;
-  }
+export const Button: React.FC<ButtonProps> = ({
+  onClick,
+  text,
+  width,
+  btnStyle,
+  children,
+}) => {
+  const setBtnStyle = () => {
+    //this function uses for adding css class for button. String which used in props also adds class for button. You can add your new class and write styles for it in css which imports in top
+    switch (btnStyle) {
+      //like:
+      // case 'yourStringWhichUsedInProps':
+      //   return css.yourClass;
+      //   break;
+      case 'ligthGreen':
+        return css.lightGreen;
+        break;
+      case 'mediumGreen':
+        return css.mediumGreen;
+        break;
+      case 'darkGreen':
+        return css.darkGreen;
+        break;
+      default:
+        return css.lightGreen;
+        break;
+    }
+  };
+  return (
+    <button
+      onClick={onClick}
+      style={{ width: width }}
+      className={`${setBtnStyle()}`}
+    >
+      {text || children}
+    </button>
+  );
 };
-//
-//
-//
-//

@@ -6,6 +6,9 @@
   border-radius: $defaultCornerRadius;
   background-color: $lightGreen;
   .task {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     .taskTitle {
       font-weight: 500;
       font-size: 26px;

@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import { getDoEverythingPageRoute } from '../../lib/routes';
+import { getAddNewTaskRoute, getDoEverythingPageRoute } from '../../lib/routes';
 import { Button } from '../Button';
 import css from './index.module.scss';
 
@@ -14,23 +14,79 @@ export const Layout = () => {
       <nav className={css.navigation}>
         <div className={css.filterBtns}>
           <div className={css.topBtns}>
-            <Button name='today' role='filter'></Button>
-            <Button name='tomorrow' role='filter'></Button>
-            <Button name='week' role='filter'></Button>
+            <Button
+              text='Сегодня'
+              btnStyle='lightGreen'
+              onClick={() => {
+                console.log('clicked!');
+              }}
+            ></Button>
+            <Button
+              text='Завтра'
+              btnStyle='lightGreen'
+              onClick={() => {
+                console.log('clicked!');
+              }}
+            ></Button>
+            <Button
+              text='На неделе'
+              btnStyle='lightGreen'
+              onClick={() => {
+                console.log('clicked!');
+              }}
+            ></Button>
           </div>
           <div className={css.bottomBtns}>
-            <Button name='month' role='filter'></Button>
-            <Button name='anyTime' role='filter'></Button>
+            <Button
+              text='В этот месяц'
+              btnStyle='lightGreen'
+              onClick={() => {
+                console.log('clicked!');
+              }}
+            ></Button>
+            <Button
+              text='Когда-нибудь'
+              btnStyle='lightGreen'
+              onClick={() => {
+                console.log('clicked!');
+              }}
+            ></Button>
           </div>
         </div>
         <div className={css.actionBtns}>
-          <Button name='settings' role='settings'></Button>
-          <Button name='auth' role='auth'></Button>
-          <Button name='registration' role='reg'></Button>
+          <Button
+            text='Настройки'
+            btnStyle='mediumGreen'
+            onClick={() => {
+              console.log('clicked!');
+            }}
+          ></Button>
+          <Button
+            text='Войти'
+            btnStyle='mediumGreen'
+            onClick={() => {
+              console.log('clicked!');
+            }}
+          ></Button>
+          <Button
+            text='Зарегаться'
+            btnStyle='mediumGreen'
+            onClick={() => {
+              console.log('clicked!');
+            }}
+          ></Button>
         </div>
       </nav>
       <div className={css.actionBar}>
-        <Button name='addTask' role='addNewTask'></Button>
+        <Button
+          btnStyle='darkGreen'
+          onClick={() => {
+            console.log('clicked!');
+          }}
+        >
+          <Link to={getAddNewTaskRoute()}>+ Задача</Link>
+        </Button>
+
         <span className={css.author}>Made by Melnikovsky with &lt;3</span>
       </div>
       <div className={css.outlet}>

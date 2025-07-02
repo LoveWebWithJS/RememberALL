@@ -1,7 +1,7 @@
 @import '../../styles/vars.scss';
 @import '../../styles/mixins.scss';
 
-.button {
+button {
   font-family: $fontFamily;
   background-color: $lightGreen;
   border: none;
@@ -12,20 +12,26 @@
   font-size: 2rem;
   font-weight: 600;
   text-transform: uppercase;
+  &:hover { 
+    cursor: pointer;
+  }
 }
-.button:hover {
-  cursor: pointer;
+.lightGreen{
+  background-color: $lightGreen;
 }
-.dark {
+.mediumGreen {
   background-color: $mediumGreen;
 }
-.extraDark {
+.darkGreen {
   background-color: $darkGreen;
   color: white;
   height: 60px;
   width: 250px;
+  a{
+    text-decoration: none;
+    color: white;
+  }
 }
-
 .auth {
   width: 37%;
   min-width: 140px;

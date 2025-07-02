@@ -28,8 +28,9 @@
     max-height: 100vh;
     .tasks {
       display: flex;
+      flex-direction: column;
       flex-wrap: wrap;
-      row-gap: 8px;
+      gap: 8px;
       max-height: 83.64%;
     }
     // &::after {

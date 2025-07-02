@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import css from './index.module.scss';
 
 interface TaskProps {
@@ -14,9 +14,10 @@ interface TaskProps {
 }
 
 export const Task: React.FC<TaskProps> = (props) => {
-  let { name, id, solved, text, createdTime, executionPeriod, importance } = props.result;
-  const [ solvedState, setSolvedState ] = useState(solved)
-  console.log(id);
+  let { name, id, solved, text, createdTime, executionPeriod, importance } =
+    props.result;
+  const [solvedState, setSolvedState] = useState(solved);
+  // console.log(id);
   const setImportanceStyle = () => {
     switch (importance) {
       case 0:
@@ -32,7 +33,9 @@ export const Task: React.FC<TaskProps> = (props) => {
         return css.bold;
         break;
       default:
-        console.error('Importance must be between 0-3. The value is not between 0 and 3. Default value set (regular)');
+        console.error(
+          'Importance must be between 0-3. The value is not between 0 and 3. Default value set (regular)'
+        );
         return css.regular;
 
         break;
@@ -55,17 +58,20 @@ export const Task: React.FC<TaskProps> = (props) => {
   };
 
   const toggleSolve = () => {
-    setSolvedState(!solvedState)
-    setSolvedStyle()
-  }
-
+    setSolvedState(!solvedState);
+    setSolvedStyle();
+  };
 
   return (
     <div className={css.taskWrapper}>
       <li className={css.task}>
-        <h3 className={`${css.taskTitle} ${setImportanceStyle()} ${setSolvedStyle()}`} onClick={toggleSolve}>{name}</h3>
-        <span className={css.taskText}>
-          {text}</span>
+        <h3
+          className={`${css.taskTitle} ${setImportanceStyle()} ${setSolvedStyle()}`}
+          onClick={toggleSolve}
+        >
+          {name}
+        </h3>
+        <span className={css.taskText}>{text}</span>
       </li>
     </div>
   );

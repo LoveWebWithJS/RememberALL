@@ -8,16 +8,16 @@ export const DoEverythingPage = () => {
   const { isLoading, isFetching, isError, error } = result;
   
   
-  if (result.data === undefined) {
-    console.error('Requaired data is undefined');
-    return <p>Requaired data is undefined. Something went wrong</p>;
-  }
   if (isLoading || isFetching) {
     return <span>Loading...</span>;
   }
   
   if (isError) {
     return <span>Error: {error.message}</span>;
+  }
+  if (result.data === undefined) {
+    console.error('Requaired data is undefined');
+    return <p>Requaired data is undefined. Something went wrong</p>;
   }
 
   result.data.sort((a, b) => a.importance < b.importance ? 1 : -1)
