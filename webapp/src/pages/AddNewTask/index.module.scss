@@ -1,58 +1,75 @@
 @import '../../styles/_mixins.scss';
 @import '../../styles/_vars.scss';
 
-.AddNewTask{
-    padding: 10px;
+.AddNewTask {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  .form {
+    background-color: $lightGreen;
+    border: $defaultBorder;
+    border-radius: $defaultCornerRadius;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     height: 100%;
     width: 100%;
-    .form{
-        background-color: $lightGreen;
-        border: $defaultBorder;
-        border-radius: $defaultCornerRadius;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        width: 100%;
-        .nameWrapper{
-            display: flex;
-            flex-direction: column;
-            label{
-                font-size: 42px;
-            }
-            input{
-                width: 20%;
-                height: 42px;
-            }
-        }
-        .textWrapper{
-            display: flex;
-            flex-direction: column;
-            label{
-                font-size: 42px;
-            }
-            textarea{
-                width: 20%;
-                height: 42px;
-            }
-        
-        }
-        .importanceWrapper{
-            display: flex;
-            flex-direction: column;
-            label{
-                font-size: 42px;
-            }
-            input{
-                width: 20%;
-                height: 42px;
-            }
-        }
-        // .submitBtn{
-
-        // }
+    padding: 15px;
+    .nameWrapper {
+      display: flex;
+      flex-direction: column;
+      @include input;
+      label {
+        font-size: 42px;
+        margin-bottom: 15px;
+      }
+      input {
+        font-size: 2rem;
+        width: 80%;
+        height: 82px;
+        margin-bottom: 15px;
+      }
     }
+    .textWrapper {
+      display: flex;
+      flex-direction: column;
+      @include textarea;
+      label {
+        font-size: 42px;
+        margin-bottom: 15px;
+      }
+      textarea {
+        font-size: 1.4rem;
+        overflow: auto;
+        &::-webkit-scrollbar {
+          background-color: $lightGreen;
+          border-radius: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: $mediumGreen;
+          border-radius: 10px;
+        }
+        width: 80%;
+        height: 460px;
+        margin-bottom: 15px;
+      }
+    }
+    .importanceWrapper {
+      display: flex;
+      flex-direction: column;
+      label {
+        font-size: 42px;
+      }
+      input {
+        width: 20%;
+        height: 42px;
+      }
+    }
+    // .submitBtn{
+
+    // }
+  }
 }

@@ -11,44 +11,74 @@
   }
 }
 
-@mixin _1440 {
-    @media (max-width: 1440px){
-        @content;
+@mixin input {
+  input {
+    font-family: $fontFamily;
+    background-color: $extraLightGreen;
+    border: 1px solid black;
+    border-radius: $defaultCornerRadius;
+    padding: 15px;
+    ::placeholder {
+      font-size: 200;
+      color: #000;
+      font-family: $fontFamily;
     }
+  }
+}
+@mixin textarea {
+  textarea {
+    font-family: $fontFamily;
+    background-color: $extraLightGreen;
+    border: 1px solid black;
+    border-radius: $defaultCornerRadius;
+    padding: 15px;
+    resize: none;
+    ::placeholder {
+      font-size: 200;
+      color: #000;
+      font-family: $fontFamily;
+    }
+  }
+}
+
+@mixin _1440 {
+  @media (max-width: 1440px) {
+    @content;
+  }
 }
 
 @mixin _1170 {
-    @media (max-width: 1170px){
-        @content;
-    }
+  @media (max-width: 1170px) {
+    @content;
+  }
 }
 
 @mixin _979 {
-    @media (max-width: 979px){
-        @content;
-    }
+  @media (max-width: 979px) {
+    @content;
+  }
 }
 
 @mixin _768 {
-    @media (max-width: 768px){
-        @content;
-    }
+  @media (max-width: 768px) {
+    @content;
+  }
 }
 
 @mixin _600 {
-    @media (max-width: 600px){
-        @content;
-    }
+  @media (max-width: 600px) {
+    @content;
+  }
 }
 
 @mixin _480 {
-    @media (max-width: 480px){
-        @content;
-    }
+  @media (max-width: 480px) {
+    @content;
+  }
 }
 
-@mixin _350{
-    @media (max-width: 350px){
-        @content;
-    }
+@mixin _350 {
+  @media (max-width: 350px) {
+    @content;
+  }
 }

@@ -17,7 +17,7 @@ export const Task: React.FC<TaskProps> = (props) => {
   let { name, id, solved, text, createdTime, executionPeriod, importance } =
     props.result;
   const [solvedState, setSolvedState] = useState(solved);
-  // console.log(id);
+  console.info(id, createdTime, executionPeriod);
   const setImportanceStyle = () => {
     switch (importance) {
       case 0:

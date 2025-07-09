@@ -12,11 +12,11 @@ button {
   font-size: 2rem;
   font-weight: 600;
   text-transform: uppercase;
-  &:hover { 
+  &:hover {
     cursor: pointer;
   }
 }
-.lightGreen{
+.lightGreen {
   background-color: $lightGreen;
 }
 .mediumGreen {
@@ -27,7 +27,7 @@ button {
   color: white;
   height: 60px;
   width: 250px;
-  a{
+  a {
     text-decoration: none;
     color: white;
   }
@@ -39,4 +39,14 @@ button {
 .reg {
   width: 46.4%;
   min-width: 227px;
+}
+.sync {
+  width: 560px;
+  background-color: $darkGreen;
+  color: white;
+  height: 60px;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }

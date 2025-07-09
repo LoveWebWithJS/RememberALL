@@ -86,6 +86,13 @@ export const Layout = () => {
         >
           <Link to={getAddNewTaskRoute()}>+ Задача</Link>
         </Button>
+        <Button
+          text='Синхронизовать задачи'
+          btnStyle='sync'
+          onClick={() => {
+            console.log('clicked!');
+          }}
+        ></Button>
 
         <span className={css.author}>Made by Melnikovsky with &lt;3</span>
       </div>

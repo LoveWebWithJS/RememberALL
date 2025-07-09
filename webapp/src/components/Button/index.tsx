@@ -1,19 +1,20 @@
 import React, { type ReactNode } from 'react';
 import css from './index.module.scss';
-interface ButtonProps {
-  onClick?: () => void; //use function expression without returning value or you can use types union
-  text?: string;
-  width?: string;
-  btnStyle?: string;
-  children?: ReactNode;
-}
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   onClick,
   text,
   width,
   btnStyle,
   children,
+  type,
+}: {
+  onClick?: () => void; //use function expression without returning value or you can use types union
+  text?: string;
+  width?: string;
+  btnStyle?: string;
+  children?: ReactNode;
+  type?: 'submit' | 'reset' | 'button' | undefined;
 }) => {
   const setBtnStyle = () => {
     //this function uses for adding css class for button. String which used in props also adds class for button. You can add your new class and write styles for it in css which imports in top
@@ -22,6 +23,9 @@ export const Button: React.FC<ButtonProps> = ({
       // case 'yourStringWhichUsedInProps':
       //   return css.yourClass;
       //   break;
+      case 'sync':
+        return css.sync;
+        break;
       case 'ligthGreen':
         return css.lightGreen;
         break;
@@ -40,6 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       style={{ width: width }}
+      type={type}
       className={`${setBtnStyle()}`}
     >
       {text || children}
