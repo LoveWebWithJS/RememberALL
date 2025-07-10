@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import css from './index.module.scss';
 import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';
+import { Fieldset } from '../../components/Fieldset/index.module';
 export const AddNewTask = () => {
   const formik = useFormik({
     initialValues: {
@@ -14,7 +15,12 @@ export const AddNewTask = () => {
       console.info('Submitted', values);
     },
   });
-
+  const importancesArr = [
+    { name: 'Крайне важная' },
+    { name: 'Важная' },
+    { name: 'Обычная' },
+    { name: 'Не важная' },
+  ];
   return (
     <div className={css.AddNewTask}>
       <form
@@ -37,6 +43,12 @@ export const AddNewTask = () => {
           className={css.textWrapper}
           formik={formik}
           placeholder='Как бы Вы описали эту задачу?'
+        />
+        <Fieldset
+          legend='Важность задачи'
+          name='name'
+          className={css.importanceWrapper}
+          inputsArr={importancesArr}
         />
         <Button
           width='80%'
