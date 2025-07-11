@@ -58,6 +58,12 @@
       }
     }
     .importanceWrapper {
+      @include fieldset;
+      width: 80%;
+      margin-bottom: 15px;
+      label {
+        font-size: 1.5rem;
+      }
     }
     // .submitBtn{
 
