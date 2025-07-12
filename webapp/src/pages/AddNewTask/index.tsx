@@ -16,10 +16,10 @@ export const AddNewTask = () => {
     },
   });
   const importancesArr = [
-    { name: 'Крайне важная' },
-    { name: 'Важная' },
-    { name: 'Обычная' },
-    { name: 'Не важная' },
+    { name: 'Крайне важная', value: 3 },
+    { name: 'Важная', value: 2 },
+    { name: 'Обычная', value: 1 },
+    { name: 'Не важная', value: 0 },
   ];
   return (
     <div className={css.AddNewTask}>
@@ -46,9 +46,10 @@ export const AddNewTask = () => {
         />
         <Fieldset
           legend='Важность задачи'
-          name='name'
+          name='importance'
           className={css.importanceWrapper}
           inputsArr={importancesArr}
+          formik={formik}
         />
         <Button
           width='80%'
