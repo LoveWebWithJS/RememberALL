@@ -15,6 +15,7 @@ export const Textarea = ({
   placeholder: string;
 }) => {
   const value = formik.values[name];
+  const error = formik.errors[name] as string | undefined;
   const isLabelExist = Boolean(labelText);
 
   return (
@@ -30,6 +31,7 @@ export const Textarea = ({
         autoComplete={autocomplete || 'off'}
         placeholder={placeholder || ''}
       />
+      {error && <div>{error}</div>}
     </div>
   );
 };

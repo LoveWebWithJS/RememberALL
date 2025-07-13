@@ -4,6 +4,8 @@ import css from './index.module.scss';
 import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';
 import { Fieldset } from '../../components/Fieldset/index.module';
+import { withZodSchema } from 'formik-validator-zod';
+import { z } from 'zod';
 export const AddNewTask = () => {
   const formik = useFormik({
     initialValues: {
@@ -11,6 +13,19 @@ export const AddNewTask = () => {
       text: '',
       importance: '',
     },
+    validate: withZodSchema(
+      z.object({
+        name: z
+          .string()
+          .min(1, 'Название для задачи должно быть хотя бы из одного символа'),
+        text: z
+          .string()
+          .min(1, 'Описание для задачи должно быть хотя бы из одного символа'),
+        importance: z
+          .string()
+          .min(1, 'Выберете, пожалуйста, важность своей задачи'),
+      })
+    ),
     onSubmit: (values) => {
       console.info('Submitted', values);
     },
@@ -51,6 +66,7 @@ export const AddNewTask = () => {
           inputsArr={importancesArr}
           formik={formik}
         />
+        {/* {!formik.isValid && <div>Some fields are invalid</div>} */}
         <Button
           width='80%'
           text='Добавить'

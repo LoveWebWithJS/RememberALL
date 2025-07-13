@@ -18,6 +18,7 @@ export const Input = ({
   placeholder?: string;
 }) => {
   const value = formik.values[name];
+  const error = formik.errors[name] as string | undefined;
   const isLabelExist = Boolean(labelText);
 
   return (
@@ -34,6 +35,7 @@ export const Input = ({
         autoComplete={autocomplete || 'off'}
         placeholder={placeholder || ''}
       />
+      {error && <div>{error}</div>}
     </div>
   );
 };
