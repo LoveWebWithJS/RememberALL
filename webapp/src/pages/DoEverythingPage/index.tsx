@@ -14,7 +14,7 @@ interface TaskBackend {
 }
 
 export const DoEverythingPage = () => {
-  const result = trpc.getTodayTasks.useQuery();
+  const result = trpc.getTasks.useQuery();
   const { isLoading, isFetching, isError, error } = result;
 
   if (isLoading || isFetching) {

@@ -1,8 +1,7 @@
 import express from 'express';
 import * as trpcExpress from '@trpc/server/adapters/express';
 import cors from 'cors';
-import { trpcRouter } from './trpc';
-
+import { TrpcRouter } from './router';
 const expressApp = express();
 
 expressApp.use(cors());
@@ -10,7 +9,7 @@ expressApp.use(cors());
 expressApp.use(
   '/trpc',
   trpcExpress.createExpressMiddleware({
-    router: trpcRouter,
+    router: TrpcRouter,
   })
 );
 expressApp.get('/ping', (req, res) => {
