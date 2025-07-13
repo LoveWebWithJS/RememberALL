@@ -2,6 +2,6 @@
 import { tasks } from '../../lib/tasks';
 import { trpc } from '../../lib/trpc';
 
-export const getTasksTprcRouter = trpc.procedure.query(() => {
+export const getTasksTrpcRoute = trpc.procedure.query(() => {
   return tasks;
 });

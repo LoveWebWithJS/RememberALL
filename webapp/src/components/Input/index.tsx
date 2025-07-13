@@ -19,6 +19,7 @@ export const Input = ({
 }) => {
   const value = formik.values[name];
   const error = formik.errors[name] as string | undefined;
+  const touched = formik.touched[name];
   const isLabelExist = Boolean(labelText);
 
   return (
@@ -28,6 +29,9 @@ export const Input = ({
         onChange={(e) => {
           void formik.setFieldValue(name, e.target.value);
         }}
+        onBlur={() => {
+          void formik.setFieldTouched(name);
+        }}
         value={value}
         type={type || 'text'}
         name={name}
@@ -35,7 +39,7 @@ export const Input = ({
         autoComplete={autocomplete || 'off'}
         placeholder={placeholder || ''}
       />
-      {error && <div>{error}</div>}
+      {!!touched && !!error && !!formik.submitCount && <div>{error}</div>}
     </div>
   );
 };

@@ -6,12 +6,18 @@ import { Textarea } from '../../components/Textarea';
 import { Fieldset } from '../../components/Fieldset/index.module';
 import { withZodSchema } from 'formik-validator-zod';
 import { z } from 'zod';
+import { trpc } from '../../lib/trpc';
 export const AddNewTask = () => {
+  const createTask = trpc.createNewTask.useMutation();
   const formik = useFormik({
     initialValues: {
       name: '',
       text: '',
-      importance: '',
+      importance: 0,
+      solved: false,
+      id: 1,
+      executionPeriod: '1 day',
+      createdTime: '~time~',
     },
     validate: withZodSchema(
       z.object({
@@ -21,13 +27,18 @@ export const AddNewTask = () => {
         text: z
           .string()
           .min(1, 'Описание для задачи должно быть хотя бы из одного символа'),
-        importance: z
-          .string()
-          .min(1, 'Выберете, пожалуйста, важность своей задачи'),
+        importance: z.coerce
+          .number()
+          .min(0, 'Выберете, пожалуйста, важность своей задачи'),
+        id: z.number(),
+        solved: z.boolean(),
+        executionPeriod: z.string(),
+        createdTime: z.string(),
       })
     ),
-    onSubmit: (values) => {
-      console.info('Submitted', values);
+    onSubmit: async (values) => {
+      console.info('Submitted: ', values);
+      await createTask.mutateAsync(values);
     },
   });
   const importancesArr = [
@@ -66,7 +77,6 @@ export const AddNewTask = () => {
           inputsArr={importancesArr}
           formik={formik}
         />
-        {/* {!formik.isValid && <div>Some fields are invalid</div>} */}
         <Button
           width='80%'
           text='Добавить'

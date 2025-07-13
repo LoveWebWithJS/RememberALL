@@ -10,10 +10,12 @@ export const Fieldset = ({
   legend: string;
   name: string;
   className: string;
-  inputsArr: Record<string, any>;
+  inputsArr: Record<any, any>;
   formik: FormikProps<any>;
 }) => {
   const error = formik.errors[name] as string | undefined;
+  const touched = formik.touched[name];
+
   return (
     <>
       <fieldset className={className}>
@@ -26,14 +28,18 @@ export const Fieldset = ({
               name={name}
               value={input.value}
               onChange={(e) => {
-                void formik.setFieldValue(name, e.target.value);
+                void formik.setFieldValue(name, Number(e.target.value));
+                console.log(formik.values);
+              }}
+              onClick={() => {
+                void formik.setFieldTouched(name);
               }}
             />
             <label htmlFor={input.name}>{input.name}</label>
           </div>
         ))}
       </fieldset>
-      {error && <div>{error}</div>}
+      {!!touched && !!error && !!formik.submitCount && <div>{error}</div>}
     </>
   );
 };
