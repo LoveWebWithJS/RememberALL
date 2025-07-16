@@ -63,8 +63,9 @@ export const AddNewTask = () => {
           formik={formik}
         />
         <Button
+          disabled={formik.isSubmitting}
           width='80%'
-          text='Добавить'
+          text={formik.isSubmitting ? 'Создание...' : 'Добавить'}
           type='submit'
           btnStyle='mediumGreen'
         ></Button>

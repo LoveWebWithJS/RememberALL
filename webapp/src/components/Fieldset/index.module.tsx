@@ -1,5 +1,10 @@
 import { type FormikProps } from 'formik';
 
+interface importancesArrTypes {
+  name: string;
+  value: number;
+}
+
 export const Fieldset = ({
   legend,
   name,
@@ -10,7 +15,8 @@ export const Fieldset = ({
   legend: string;
   name: string;
   className: string;
-  inputsArr: Record<any, any>;
+  inputsArr: Array<importancesArrTypes>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formik: FormikProps<any>;
 }) => {
   const error = formik.errors[name] as string | undefined;
@@ -20,9 +26,10 @@ export const Fieldset = ({
     <>
       <fieldset className={className}>
         <legend>{legend}</legend>
-        {inputsArr.map((input: any, i: number) => (
+        {inputsArr.map((input: importancesArrTypes, i: number) => (
           <div key={i}>
             <input
+              disabled={formik.isSubmitting}
               type='radio'
               id={input.name}
               name={name}

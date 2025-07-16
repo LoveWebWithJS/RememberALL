@@ -13,6 +13,7 @@ export const Input = ({
   name: string;
   autocomplete?: string;
   className: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formik: FormikProps<any>;
   type?: string;
   placeholder?: string;
@@ -26,6 +27,7 @@ export const Input = ({
     <div className={className}>
       {isLabelExist ? <label htmlFor={name}>{labelText}</label> : null}
       <input
+        disabled={formik.isSubmitting}
         onChange={(e) => {
           void formik.setFieldValue(name, e.target.value);
         }}

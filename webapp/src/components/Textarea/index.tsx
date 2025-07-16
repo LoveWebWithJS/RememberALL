@@ -11,6 +11,7 @@ export const Textarea = ({
   name: string;
   autocomplete?: string;
   className: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formik: FormikProps<any>;
   placeholder: string;
 }) => {
@@ -23,6 +24,7 @@ export const Textarea = ({
     <div className={className}>
       {isLabelExist ? <label htmlFor={name}>{labelText}</label> : null}
       <textarea
+        disabled={formik.isSubmitting}
         onChange={(e) => {
           void formik.setFieldValue(name, e.target.value);
         }}

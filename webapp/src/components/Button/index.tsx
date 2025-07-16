@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import css from './index.module.scss';
 
 export const Button = ({
+  disabled,
   onClick,
   text,
   width,
@@ -9,6 +10,7 @@ export const Button = ({
   children,
   type,
 }: {
+  disabled?: boolean;
   onClick?: () => void; //use function expression without returning value or you can use types union
   text?: string;
   width?: string;
@@ -42,6 +44,7 @@ export const Button = ({
   };
   return (
     <button
+      disabled={disabled || false}
       onClick={onClick}
       style={{ width: width }}
       type={type}
