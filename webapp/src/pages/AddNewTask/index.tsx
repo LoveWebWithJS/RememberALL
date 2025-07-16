@@ -22,8 +22,8 @@ export const AddNewTask = () => {
     },
     validate: withZodSchema(zCreateNewTaskTrpcInput),
     onSubmit: async (values) => {
-      console.info('Submitted: ', values);
       await createTask.mutateAsync(values);
+      formik.resetForm();
     },
   });
   const importancesArr = [
