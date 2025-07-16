@@ -1,4 +1,5 @@
 import { trpc } from '../lib/trpc';
+// Just use extension "Generate Index" (for me ctrl+K I)
 // @index('./**/index.ts', f => `import { ${f.path.split('/').slice(0, -1).pop()}TrpcRoute } from '${f.path.split('/').slice(0, -1).join('/')}'`)
 import { createNewTaskTrpcRoute } from './createNewTask';
 import { getTasksTrpcRoute } from './getTasks';

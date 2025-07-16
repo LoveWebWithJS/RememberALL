@@ -5,8 +5,9 @@ import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';
 import { Fieldset } from '../../components/Fieldset/index.module';
 import { withZodSchema } from 'formik-validator-zod';
-import { z } from 'zod';
+// import { z } from 'zod';
 import { trpc } from '../../lib/trpc';
+import { zCreateNewTaskTrpcInput } from '../../../../backend/src/router/createNewTask/input';
 export const AddNewTask = () => {
   const createTask = trpc.createNewTask.useMutation();
   const formik = useFormik({
@@ -19,23 +20,7 @@ export const AddNewTask = () => {
       executionPeriod: '1 day',
       createdTime: '~time~',
     },
-    validate: withZodSchema(
-      z.object({
-        name: z
-          .string()
-          .min(1, 'Название для задачи должно быть хотя бы из одного символа'),
-        text: z
-          .string()
-          .min(1, 'Описание для задачи должно быть хотя бы из одного символа'),
-        importance: z.coerce
-          .number()
-          .min(0, 'Выберете, пожалуйста, важность своей задачи'),
-        id: z.number(),
-        solved: z.boolean(),
-        executionPeriod: z.string(),
-        createdTime: z.string(),
-      })
-    ),
+    validate: withZodSchema(zCreateNewTaskTrpcInput),
     onSubmit: async (values) => {
       console.info('Submitted: ', values);
       await createTask.mutateAsync(values);
