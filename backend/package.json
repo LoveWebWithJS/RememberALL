@@ -3,10 +3,22 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "ts-node-dev --rs ./src/index.ts",
+    "dev": "ts-node-dev --watch ./.env --rs ./src/index.ts",
     "build": "rimraf ./dist && tsc --build ./tsconfig.json",
     "start": "node ./dist/index.js",
-    "types": "tsc --noEmit --project ./tsconfig.json"
+    "pmd": "prisma migrate dev",
+    "pgc": "prisma generate",
+    "types": "tsc --noEmit --project ./tsconfig.json",
+    "prepare": "npm pgc"
+  },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.12.0",
+    "@trpc/server": "^11.2.0",
+    "express": "^5.1.0",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@types/cors": "^2.8.18",
@@ -14,14 +26,10 @@
     "@types/node": "^20.5.0",
     "cors": "^2.8.5",
     "prettier": "^3.0.2",
+    "prisma": "^6.12.0",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "@trpc/server": "^11.2.0",
-    "express": "^5.1.0",
-    "zod": "^3.25.67"
   }
 }
