@@ -2,7 +2,7 @@ import { type FormikProps } from 'formik';
 
 interface importancesArrTypes {
   name: string;
-  value: number;
+  value: string;
 }
 
 export const Fieldset = ({
@@ -35,7 +35,7 @@ export const Fieldset = ({
               name={name}
               value={input.value}
               onChange={(e) => {
-                void formik.setFieldValue(name, Number(e.target.value));
+                void formik.setFieldValue(name, e.target.value);
                 console.log(formik.values);
               }}
               onClick={() => {

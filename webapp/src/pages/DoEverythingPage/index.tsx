@@ -6,11 +6,11 @@ import { Task } from '../../components/Task';
 interface TaskBackend {
   name: string;
   solved: boolean;
-  id: number;
+  id: string;
   text: string;
-  createdTime: string;
-  executionPeriod: string;
-  importance: number;
+  // createdTime: string;
+  // executionPeriod: string;
+  importance: string;
 }
 
 export const DoEverythingPage = () => {
@@ -29,7 +29,9 @@ export const DoEverythingPage = () => {
     return <p>Requaired data is undefined. Something went wrong</p>;
   }
 
-  result.data.sort((a: any, b: any) => (a.importance < b.importance ? 1 : -1));
+  result.data.tasks.sort((a: TaskBackend, b: TaskBackend) =>
+    a.importance < b.importance ? 1 : -1
+  );
 
   return (
     <div className={css.DoEverythingPage}>
@@ -38,8 +40,8 @@ export const DoEverythingPage = () => {
       </div>
       <div className={css.tasksWrapper}>
         <ul className={css.tasks}>
-          {result.data.map((task: TaskBackend, i: number) => (
-            <Task key={task.id} result={result.data[i]} />
+          {result.data.tasks.map((task: TaskBackend, i: number) => (
+            <Task key={task.id} result={result.data.tasks[i]} />
           ))}
         </ul>
       </div>

@@ -8,10 +8,10 @@ datasource db {
 }
 
 model Task {
-  id          String  @id @default(uuid())
-  name        String
-  text        String
-  importance  String
-  solved      Boolean
-  createdTime String
+  id         String  @id @default(uuid())
+  name       String
+  text       String
+  importance String
+  solved     Boolean
+  // createdTime String
 }

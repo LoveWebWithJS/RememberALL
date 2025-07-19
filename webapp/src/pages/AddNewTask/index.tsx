@@ -14,11 +14,9 @@ export const AddNewTask = () => {
     initialValues: {
       name: '',
       text: '',
-      importance: 0,
+      importance: '0',
       solved: false,
-      id: 1,
-      executionPeriod: '1 day',
-      createdTime: '~time~',
+      id: '',
     },
     validate: withZodSchema(zCreateNewTaskTrpcInput),
     onSubmit: async (values) => {
@@ -27,10 +25,10 @@ export const AddNewTask = () => {
     },
   });
   const importancesArr = [
-    { name: 'Крайне важная', value: 3 },
-    { name: 'Важная', value: 2 },
-    { name: 'Обычная', value: 1 },
-    { name: 'Не важная', value: 0 },
+    { name: 'Крайне важная', value: '3' },
+    { name: 'Важная', value: '2' },
+    { name: 'Обычная', value: '1' },
+    { name: 'Не важная', value: '0' },
   ];
   return (
     <div className={css.AddNewTask}>
