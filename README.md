@@ -1,7 +1,7 @@
-![Uploading logo.png…]()
+![Logo. The clock](./webapp/src/assets/logo.png)
 # RememberALL
 
-This project is just for ~~fun~~ for learning a basic typescript fullstack developement.
+This project is just for ~~fun~~ learning a basic typescript fullstack developement.
 It uses tRPC as a very useful instrument for fullstack developers, React on frontend, prisma (because i don't want to learn how to write CRUD operations on SQL lol) for manipulations with PostgreSQL on backend
 
 ## About project useless 
