@@ -8,7 +8,7 @@ interface TaskBackend {
   solved: boolean;
   id: string;
   text: string;
-  // createdTime: string;
+  // createdAt: string;
   // executionPeriod: string;
   importance: string;
 }

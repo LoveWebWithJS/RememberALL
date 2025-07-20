@@ -8,8 +8,8 @@ export const zCreateNewTaskTrpcInput = z.object({
     .string()
     .min(1, 'Описание для задачи должно быть хотя бы из одного символа'),
   importance: z.string().min(0, 'Выберете, пожалуйста, важность своей задачи'),
-  id: z.string(),
+  // id: z.string(),
   solved: z.boolean(),
   // executionPeriod: z.string(),
-  // createdTime: z.string(),
+  // createdAt: z.string(),
 });

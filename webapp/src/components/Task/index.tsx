@@ -5,18 +5,18 @@ interface TaskProps {
   result: {
     name: string;
     solved: boolean;
-    id: string;
+    // id: string;
     text: string;
-    // createdTime: string;
+    // createdAt: string;
     // executionPeriod: string;
     importance: string;
   };
 }
 
 export const Task: React.FC<TaskProps> = (props) => {
-  const { name, id, solved, text, importance } = props.result;
+  const { name, solved, text, importance } = props.result;
   const [solvedState, setSolvedState] = useState(solved);
-  console.info(id);
+  // console.info(id);
   const setImportanceStyle = () => {
     switch (Number(importance)) {
       case 0:

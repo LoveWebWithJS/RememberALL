@@ -16,7 +16,7 @@ export const AddNewTask = () => {
       text: '',
       importance: '0',
       solved: false,
-      id: '',
+      // id: '',
     },
     validate: withZodSchema(zCreateNewTaskTrpcInput),
     onSubmit: async (values) => {
