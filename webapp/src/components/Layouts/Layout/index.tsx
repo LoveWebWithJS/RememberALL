@@ -1,6 +1,10 @@
 import { Link, Outlet } from 'react-router-dom';
-import { getAddNewTaskRoute, getDoEverythingPageRoute } from '../../lib/routes';
-import { Button } from '../Button';
+import {
+  getAddNewTaskRoute,
+  getDoEverythingPageRoute,
+  getSignUpRoute,
+} from '../../../lib/routes';
+import { Button } from '../../Button';
 import css from './index.module.scss';
 
 export const Layout = () => {
@@ -69,12 +73,13 @@ export const Layout = () => {
             }}
           ></Button>
           <Button
-            text='Зарегаться'
             btnStyle='mediumGreen'
             onClick={() => {
               console.log('clicked!');
             }}
-          ></Button>
+          >
+            <Link to={getSignUpRoute()}>Зарегаться</Link>
+          </Button>
         </div>
       </nav>
       <div className={css.actionBar}>
@@ -100,14 +105,5 @@ export const Layout = () => {
         <Outlet />
       </div>
     </div>
-
-    // <div className={css.layout}>
-    //   <header className={css.header}>
-    //     <h1 className={css.title}>
-    //       Помни и <Link to={getDoEverythingPageRoute()}>делай</Link> всё
-    //     </h1>
-    //   </header>
-    //   <Outlet />
-    // </div>
   );
 };

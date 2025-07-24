@@ -1,0 +1,22 @@
+@import '../../../styles/vars.scss';
+@import '../../../styles/mixins.scss';
+
+.layout {
+  height: 100vh;
+  max-height: 100vh;
+  .header {
+    background-color: $lightGreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    border: $defaultBorder;
+    border-radius: 0 0 $defaultCornerRadius $defaultCornerRadius;
+    h1 {
+      @include h1;
+    }
+  }
+  .outlet {
+    max-height: 100vh;
+  }
+}

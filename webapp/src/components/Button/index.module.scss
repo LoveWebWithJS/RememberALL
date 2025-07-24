@@ -15,6 +15,10 @@ button {
   &:hover {
     cursor: pointer;
   }
+  * {
+    text-decoration: none;
+    color: black;
+  }
 }
 .lightGreen {
   background-color: $lightGreen;
