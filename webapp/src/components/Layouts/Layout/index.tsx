@@ -2,6 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 import {
   getAddNewTaskRoute,
   getDoEverythingPageRoute,
+  getSignInRoute,
   getSignUpRoute,
 } from '../../../lib/routes';
 import { Button } from '../../Button';
@@ -66,12 +67,13 @@ export const Layout = () => {
             }}
           ></Button>
           <Button
-            text='Войти'
             btnStyle='mediumGreen'
             onClick={() => {
               console.log('clicked!');
             }}
-          ></Button>
+          >
+            <Link to={getSignInRoute()}>Войти</Link>
+          </Button>
           <Button
             btnStyle='mediumGreen'
             onClick={() => {

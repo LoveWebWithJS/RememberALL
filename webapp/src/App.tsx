@@ -7,12 +7,14 @@ import {
   getSettingsPageRoute,
   getAddNewTaskRoute,
   getSignUpRoute,
+  getSignInRoute,
 } from './lib/routes';
 import { Layout } from './components/Layouts/Layout';
 import './styles/global.scss';
 import { AddNewTask } from './pages/AddNewTask';
 import { SignUpPage } from './pages/SignUpPage';
 import { SimpleLayout } from './components/Layouts/SimpleLayout';
+import { SignInPage } from './pages/SignInPage';
 // import { RememberEverythingPage } from './pages/RememberEverythingPage';
 
 export const App = () => {
@@ -31,6 +33,7 @@ export const App = () => {
           <Route element={<SimpleLayout />}>
             <Route path={getSettingsPageRoute()} element={<SettingsPage />} />
             <Route path={getSignUpRoute()} element={<SignUpPage />} />
+            <Route path={getSignInRoute()} element={<SignInPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
