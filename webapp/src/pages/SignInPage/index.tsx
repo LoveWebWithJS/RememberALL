@@ -6,6 +6,8 @@ import { Input } from '../../components/Input';
 import { withZodSchema } from 'formik-validator-zod';
 import { trpc } from '../../lib/trpc';
 import { zSignInTrpcInput } from '../../../../backend/src/router/signIn/input';
+import { getSignUpRoute } from '../../lib/routes';
+import { Link } from 'react-router-dom';
 
 export const SignInPage = () => {
   const signUp = trpc.signIn.useMutation();
@@ -43,7 +45,7 @@ export const SignInPage = () => {
           formik={formik}
           placeholder='Пароль'
         />
-        {/* //TODO: сделать ссылку для перехода на страницу Sign Up*/}
+        <Link to={getSignUpRoute()}>У вас ещё нет аккаунта?</Link>
         {/* //TODO: ловить ошибки*/}
         <Button
           disabled={formik.isSubmitting}
