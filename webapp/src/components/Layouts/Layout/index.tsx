@@ -3,12 +3,15 @@ import {
   getAddNewTaskRoute,
   getDoEverythingPageRoute,
   getSignInRoute,
+  getSignOutRoute,
   getSignUpRoute,
 } from '../../../lib/routes';
 import { Button } from '../../Button';
 import css from './index.module.scss';
+import { trpc } from '../../../lib/trpc';
 
 export const Layout = () => {
+  const { data, isLoading, isFetching, isError } = trpc.getMe.useQuery();
   return (
     <div className={css.layout}>
       <header className={css.header}>
@@ -66,22 +69,37 @@ export const Layout = () => {
               console.log('clicked!');
             }}
           ></Button>
-          <Button
-            btnStyle='mediumGreen'
-            onClick={() => {
-              console.log('clicked!');
-            }}
-          >
-            <Link to={getSignInRoute()}>Войти</Link>
-          </Button>
-          <Button
-            btnStyle='mediumGreen'
-            onClick={() => {
-              console.log('clicked!');
-            }}
-          >
-            <Link to={getSignUpRoute()}>Зарегаться</Link>
-          </Button>
+          {isLoading || isFetching || isError ? null : data?.me ? ( //и че тут делать с этой датой если может быть undefined?
+            <>
+              <Button
+                btnStyle='mediumGreen'
+                onClick={() => {
+                  console.log('clicked!');
+                }}
+              >
+                <Link to={getSignOutRoute()}>Разлогинится</Link>
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                btnStyle='mediumGreen'
+                onClick={() => {
+                  console.log('clicked!');
+                }}
+              >
+                <Link to={getSignInRoute()}>Войти</Link>
+              </Button>
+              <Button
+                btnStyle='mediumGreen'
+                onClick={() => {
+                  console.log('clicked!');
+                }}
+              >
+                <Link to={getSignUpRoute()}>Зарегаться</Link>
+              </Button>
+            </>
+          )}
         </div>
       </nav>
       <div className={css.actionBar}>

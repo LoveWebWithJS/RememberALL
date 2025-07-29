@@ -1,16 +1,20 @@
 import { Button } from '../../components/Button';
 import { useFormik } from 'formik';
 import css from './index.module.scss';
-// import { z } from 'zod';
+import Cookies from 'js-cookie';
 import { Input } from '../../components/Input';
 import { withZodSchema } from 'formik-validator-zod';
 import { trpc } from '../../lib/trpc';
 import { zSignInTrpcInput } from '../../../../backend/src/router/signIn/input';
-import { getSignUpRoute } from '../../lib/routes';
-import { Link } from 'react-router-dom';
+import { getDoEverythingPageRoute, getSignUpRoute } from '../../lib/routes';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export const SignInPage = () => {
+  const navigate = useNavigate();
+  const trpcUtils = trpc.useUtils();
   const signUp = trpc.signIn.useMutation();
+  const [submittingError, setSubmittingError] = useState<string | null>(null);
   const formik = useFormik({
     initialValues: {
       nick: '',
@@ -18,8 +22,15 @@ export const SignInPage = () => {
     },
     validate: withZodSchema(zSignInTrpcInput),
     onSubmit: async (values) => {
-      await signUp.mutateAsync(values);
-      formik.resetForm();
+      try {
+        const { token } = await signUp.mutateAsync(values);
+        Cookies.set('token', token, { expires: 999 });
+        void trpcUtils.invalidate();
+        navigate(getDoEverythingPageRoute());
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        setSubmittingError(error.message);
+      }
     },
   });
   return (
@@ -29,6 +40,7 @@ export const SignInPage = () => {
         className={css.form}
         onSubmit={(e) => {
           e.preventDefault();
+          setSubmittingError(null);
           formik.handleSubmit();
         }}
       >
@@ -46,7 +58,11 @@ export const SignInPage = () => {
           placeholder='Пароль'
         />
         <Link to={getSignUpRoute()}>У вас ещё нет аккаунта?</Link>
-        {/* //TODO: ловить ошибки*/}
+        {submittingError && (
+          <>
+            <br /> <span color='red'>{submittingError}</span>
+          </>
+        )}
         <Button
           disabled={formik.isSubmitting}
           width='80%'

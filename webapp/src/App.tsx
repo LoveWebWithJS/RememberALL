@@ -8,6 +8,7 @@ import {
   getAddNewTaskRoute,
   getSignUpRoute,
   getSignInRoute,
+  getSignOutRoute,
 } from './lib/routes';
 import { Layout } from './components/Layouts/Layout';
 import './styles/global.scss';
@@ -15,6 +16,7 @@ import { AddNewTask } from './pages/AddNewTask';
 import { SignUpPage } from './pages/SignUpPage';
 import { SimpleLayout } from './components/Layouts/SimpleLayout';
 import { SignInPage } from './pages/SignInPage';
+import { SignOutPage } from './pages/SignOutPage';
 // import { RememberEverythingPage } from './pages/RememberEverythingPage';
 
 export const App = () => {
@@ -22,6 +24,7 @@ export const App = () => {
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
+          <Route path={getSignOutRoute()} element={<SignOutPage />} />
           <Route element={<Layout />}>
             <Route
               path={getDoEverythingPageRoute()}
