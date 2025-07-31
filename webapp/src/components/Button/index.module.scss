@@ -1,6 +1,16 @@
 @import '../../styles/vars.scss';
 @import '../../styles/mixins.scss';
 
+a {
+  width: 84.21%;
+  min-width: 273px;
+  height: 69px;
+}
+
+a > button {
+  width: 100%;
+}
+
 button {
   font-family: $fontFamily;
   background-color: $lightGreen;

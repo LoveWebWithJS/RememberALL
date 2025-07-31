@@ -6,7 +6,7 @@ import {
   getSignOutRoute,
   getSignUpRoute,
 } from '../../../lib/routes';
-import { Button } from '../../Button';
+import { Button, LinkButton } from '../../Button';
 import css from './index.module.scss';
 import { trpc } from '../../../lib/trpc';
 
@@ -71,46 +71,42 @@ export const Layout = () => {
           ></Button>
           {isLoading || isFetching || isError ? null : data?.me ? ( //и че тут делать с этой датой если может быть undefined?
             <>
-              <Button
+              <LinkButton
+                to={getSignOutRoute()}
+                text='Разлогинится'
                 btnStyle='mediumGreen'
-                onClick={() => {
-                  console.log('clicked!');
-                }}
-              >
-                <Link to={getSignOutRoute()}>Разлогинится</Link>
-              </Button>
+              />
             </>
           ) : (
             <>
-              <Button
+              <LinkButton
+                to={getSignInRoute()}
+                text='Войти'
                 btnStyle='mediumGreen'
-                onClick={() => {
-                  console.log('clicked!');
-                }}
-              >
-                <Link to={getSignInRoute()}>Войти</Link>
-              </Button>
-              <Button
+              />
+              <LinkButton
+                to={getSignUpRoute()}
+                text='Зарегаться'
                 btnStyle='mediumGreen'
-                onClick={() => {
-                  console.log('clicked!');
-                }}
-              >
-                <Link to={getSignUpRoute()}>Зарегаться</Link>
-              </Button>
+              />
             </>
           )}
         </div>
       </nav>
       <div className={css.actionBar}>
-        <Button
+        <LinkButton
+          to={getAddNewTaskRoute()}
+          text='+ Задача'
+          btnStyle='darkGreen'
+        />
+        {/* <Button
           btnStyle='darkGreen'
           onClick={() => {
             console.log('clicked!');
           }}
         >
           <Link to={getAddNewTaskRoute()}>+ Задача</Link>
-        </Button>
+        </Button> */}
         <Button
           text='Синхронизовать задачи'
           btnStyle='sync'

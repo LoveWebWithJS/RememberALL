@@ -91,11 +91,17 @@
     background-color: $mediumGreen;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     padding-left: 33px;
     margin-left: -15px;
     gap: 8px;
     border-radius: 0 $defaultCornerRadius 0 0;
     border: $defaultBorder;
+    a {
+      width: fit-content;
+      min-width: fit-content;
+      height: 60px;
+    }
     .author {
       position: absolute;
       bottom: 1px;
