@@ -5,10 +5,7 @@ interface TaskProps {
   result: {
     name: string;
     solved: boolean;
-    // id: string;
     text: string;
-    // createdAt: string;
-    // executionPeriod: string;
     importance: string;
   };
 }

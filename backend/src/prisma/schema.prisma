@@ -12,6 +12,7 @@ model User {
   nick      String   @unique
   password  String
   createdAt DateTime @default(now())
+  tasks     Task[]
 }
 
 model Task {
@@ -21,4 +22,6 @@ model Task {
   importance String
   solved     Boolean
   createdAt  DateTime @default(now())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
 }

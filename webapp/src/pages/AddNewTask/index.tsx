@@ -5,7 +5,6 @@ import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';
 import { Fieldset } from '../../components/Fieldset/index.module';
 import { withZodSchema } from 'formik-validator-zod';
-// import { z } from 'zod';
 import { trpc } from '../../lib/trpc';
 import { useNavigate } from 'react-router-dom';
 import { zCreateNewTaskTrpcInput } from '../../../../backend/src/router/createNewTask/input';
@@ -19,7 +18,6 @@ export const AddNewTask = () => {
       text: '',
       importance: '0',
       solved: false,
-      // id: '',
     },
     validate: withZodSchema(zCreateNewTaskTrpcInput),
     onSubmit: async (values) => {

@@ -69,7 +69,7 @@ export const Layout = () => {
               console.log('clicked!');
             }}
           ></Button>
-          {isLoading || isFetching || isError ? null : data?.me ? ( //и че тут делать с этой датой если может быть undefined?
+          {isLoading || isFetching || isError ? null : data?.me ? (
             <>
               <LinkButton
                 to={getSignOutRoute()}
@@ -94,26 +94,39 @@ export const Layout = () => {
         </div>
       </nav>
       <div className={css.actionBar}>
-        <LinkButton
-          to={getAddNewTaskRoute()}
-          text='+ Задача'
-          btnStyle='darkGreen'
-        />
-        {/* <Button
-          btnStyle='darkGreen'
-          onClick={() => {
-            console.log('clicked!');
-          }}
-        >
-          <Link to={getAddNewTaskRoute()}>+ Задача</Link>
-        </Button> */}
-        <Button
-          text='Синхронизовать задачи'
-          btnStyle='sync'
-          onClick={() => {
-            console.log('clicked!');
-          }}
-        ></Button>
+        {isLoading || isFetching || isError ? null : data?.me ? (
+          <>
+            <LinkButton
+              to={getAddNewTaskRoute()}
+              text='+ Задача'
+              btnStyle='darkGreen'
+            />
+            <Button
+              text='Синхронизовать задачи'
+              btnStyle='sync'
+              onClick={() => {
+                console.log('clicked!');
+              }}
+            ></Button>
+          </>
+        ) : (
+          <>
+            <LinkButton
+              to={getAddNewTaskRoute()}
+              text='+ Задача'
+              btnStyle='darkGreen'
+              disabled={true}
+            />
+            <Button
+              text='Синхронизовать задачи'
+              btnStyle='sync'
+              onClick={() => {
+                console.log('Тут будет функционал синхронизации...');
+              }}
+              disabled={true}
+            ></Button>
+          </>
+        )}
 
         <span className={css.author}>Made by Melnikovsky with &lt;3</span>
       </div>

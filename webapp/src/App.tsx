@@ -17,7 +17,6 @@ import { SignUpPage } from './pages/SignUpPage';
 import { SimpleLayout } from './components/Layouts/SimpleLayout';
 import { SignInPage } from './pages/SignInPage';
 import { SignOutPage } from './pages/SignOutPage';
-// import { RememberEverythingPage } from './pages/RememberEverythingPage';
 
 export const App = () => {
   return (
@@ -30,7 +29,6 @@ export const App = () => {
               path={getDoEverythingPageRoute()}
               element={<DoEverythingPage />}
             />
-            {/* <Route path={getRememberEverythingPageRoute()} element={<RememberEverythingPage />} /> */}
             <Route path={getAddNewTaskRoute()} element={<AddNewTask />} />
           </Route>
           <Route element={<SimpleLayout />}>

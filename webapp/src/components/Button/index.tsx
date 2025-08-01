@@ -39,6 +39,7 @@ export const LinkButton = ({
   children,
   to,
   className,
+  disabled,
 }: {
   disabled?: boolean;
   text?: string;
@@ -49,7 +50,7 @@ export const LinkButton = ({
   className?: string;
 }) => {
   return (
-    <Link to={to} className={`${className}`}>
+    <Link to={disabled ? '' : to} className={`${className}`}>
       <button className={`${setBtnStyle(btnStyle)}`} style={{ width: width }}>
         {text || children}
       </button>
