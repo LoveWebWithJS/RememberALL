@@ -7,8 +7,11 @@ import { Fieldset } from '../../components/Fieldset/index.module';
 import { withZodSchema } from 'formik-validator-zod';
 // import { z } from 'zod';
 import { trpc } from '../../lib/trpc';
+import { useNavigate } from 'react-router-dom';
 import { zCreateNewTaskTrpcInput } from '../../../../backend/src/router/createNewTask/input';
+import { getDoEverythingPageRoute } from '../../lib/routes';
 export const AddNewTask = () => {
+  const navigate = useNavigate();
   const createTask = trpc.createNewTask.useMutation();
   const formik = useFormik({
     initialValues: {
@@ -21,7 +24,7 @@ export const AddNewTask = () => {
     validate: withZodSchema(zCreateNewTaskTrpcInput),
     onSubmit: async (values) => {
       await createTask.mutateAsync(values);
-      formik.resetForm();
+      navigate(getDoEverythingPageRoute());
     },
   });
   const importancesArr = [
