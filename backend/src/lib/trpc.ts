@@ -1,6 +1,6 @@
 import * as trpcExpress from '@trpc/server/adapters/express';
 import { type Express } from 'express';
-import { type trpcRouter } from '../router';
+import { type TrpcRouter } from '../router';
 import { type AppContext } from './ctx';
 import { initTRPC } from '@trpc/server';
 import { type ExpressRequest } from '../utils/types';
@@ -19,7 +19,7 @@ export const trpc = initTRPC.context<TrpcContext>().create();
 export const applyTrpcToExpressApp = (
   expressApp: Express,
   appContext: AppContext,
-  trpcRouter: trpcRouter
+  trpcRouter: TrpcRouter
 ) => {
   expressApp.use(
     '/trpc',

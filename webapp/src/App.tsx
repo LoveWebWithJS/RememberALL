@@ -9,6 +9,8 @@ import {
   getSignUpRoute,
   getSignInRoute,
   getSignOutRoute,
+  getEditTaskRoute,
+  editTaskRouteParams,
 } from './lib/routes';
 import { Layout } from './components/Layouts/Layout';
 import './styles/global.scss';
@@ -17,6 +19,7 @@ import { SignUpPage } from './pages/SignUpPage';
 import { SimpleLayout } from './components/Layouts/SimpleLayout';
 import { SignInPage } from './pages/SignInPage';
 import { SignOutPage } from './pages/SignOutPage';
+import { EditTaskPage } from './pages/EditTaskPage';
 
 export const App = () => {
   return (
@@ -25,6 +28,10 @@ export const App = () => {
         <Routes>
           <Route path={getSignOutRoute()} element={<SignOutPage />} />
           <Route element={<Layout />}>
+            <Route
+              path={getEditTaskRoute(editTaskRouteParams)}
+              element={<EditTaskPage />}
+            />
             <Route
               path={getDoEverythingPageRoute()}
               element={<DoEverythingPage />}
