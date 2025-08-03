@@ -34,43 +34,47 @@ export const SignInPage = () => {
     },
   });
   return (
-    <div className={css.AddNewTask}>
-      <h2>Войти</h2>
-      <form
-        className={css.form}
-        onSubmit={(e) => {
-          e.preventDefault();
-          setSubmittingError(null);
-          formik.handleSubmit();
-        }}
-      >
-        <Input
-          name='nick'
-          className={css.nickWrapper}
-          formik={formik}
-          placeholder='Логин'
-        />
-        <Input
-          name='password'
-          type='password'
-          className={css.passwordWrapper}
-          formik={formik}
-          placeholder='Пароль'
-        />
-        <Link to={getSignUpRoute()}>У вас ещё нет аккаунта?</Link>
-        {submittingError && (
-          <>
-            <br /> <span color='red'>{submittingError}</span>
-          </>
-        )}
-        <Button
-          disabled={formik.isSubmitting}
-          width='80%'
-          text={formik.isSubmitting ? 'Авторизация...' : 'Войти'}
-          type='submit'
-          btnStyle='mediumGreen'
-        ></Button>
-      </form>
+    <div className={css.LogInWrapper}>
+      <div className={css.LogIn}>
+        <h1>Войти</h1>
+        <form
+          className={css.form}
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSubmittingError(null);
+            formik.handleSubmit();
+          }}
+        >
+          <Input
+            name='nick'
+            className={css.nickWrapper}
+            formik={formik}
+            placeholder='Логин'
+          />
+          <Input
+            name='password'
+            type='password'
+            className={css.passwordWrapper}
+            formik={formik}
+            placeholder='Пароль'
+          />
+          <Link to={getSignUpRoute()} className={css.SignInLink}>
+            У вас ещё нет аккаунта?
+          </Link>
+          {submittingError && (
+            <>
+              <br /> <span color='red'>{submittingError}</span>
+            </>
+          )}
+          <Button
+            disabled={formik.isSubmitting}
+            width='80%'
+            text={formik.isSubmitting ? 'Авторизация...' : 'Войти'}
+            type='submit'
+            btnStyle='mediumGreen'
+          ></Button>
+        </form>
+      </div>
     </div>
   );
 };

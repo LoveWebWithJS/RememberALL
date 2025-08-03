@@ -1,0 +1,82 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.SignUpWrapper {
+  display: flex;
+  padding-top: 100px;
+  justify-content: center;
+  height: 67%;
+  min-height: 750px;
+  width: 100%;
+  .SignUp {
+    background-color: $lightGreen;
+    border-radius: $defaultCornerRadius;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 556px;
+    max-height: 100%;
+    padding-top: 20px;
+    h1 {
+      @include h1;
+      font-weight: 600;
+      margin-bottom: 54px;
+    }
+    form {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      .nickWrapper {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include input;
+        input {
+          font-size: 2rem;
+          width: 100%;
+          height: 82px;
+          margin-bottom: 15px;
+        }
+      }
+      .passwordWrapper {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include input;
+        margin-top: 8px;
+        input {
+          font-size: 2rem;
+          width: 100%;
+          height: 82px;
+          margin-bottom: 15px;
+        }
+      }
+      .passwordAgainWrapper {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include input;
+        margin-top: 8px;
+        input {
+          font-size: 2rem;
+          width: 100%;
+          height: 82px;
+          margin-bottom: 15px;
+        }
+      }
+      .SignUpLink {
+        text-decoration: none;
+        color: black;
+        font-weight: 500;
+        width: fit-content;
+        height: fit-content;
+        font-size: $defaultFontSize;
+        margin: 20px 0 20px 0;
+      }
+    }
+  }
+}
