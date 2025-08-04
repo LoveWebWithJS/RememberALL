@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import css from './index.module.scss';
+import { LinkButton } from '../Button';
 
 interface TaskProps {
   result: {
@@ -7,13 +8,13 @@ interface TaskProps {
     solved: boolean;
     text: string;
     importance: string;
+    id: string;
   };
 }
 
 export const Task: React.FC<TaskProps> = (props) => {
-  const { name, solved, text, importance } = props.result;
+  const { name, solved, text, importance, id } = props.result;
   const [solvedState, setSolvedState] = useState(solved);
-  // console.info(id);
   const setImportanceStyle = () => {
     switch (Number(importance)) {
       case 0:
@@ -52,7 +53,6 @@ export const Task: React.FC<TaskProps> = (props) => {
         break;
     }
   };
-
   const toggleSolve = () => {
     setSolvedState(!solvedState);
     setSolvedStyle();
@@ -69,6 +69,14 @@ export const Task: React.FC<TaskProps> = (props) => {
         </h3>
         <span className={css.taskText}>{text}</span>
       </li>
+      {/* <div className={css.editButtonWrapper}> */}
+      <LinkButton
+        to={`/task/${id}/edit`}
+        text='Редактировать'
+        btnStyle='mediumGreen'
+        className={css.editButton}
+      />
+      {/* </div> */}
     </div>
   );
 };

@@ -77,7 +77,7 @@ const EditTaskComponent = ({
         <Button
           disabled={formik.isSubmitting}
           width='80%'
-          text={formik.isSubmitting ? 'Создание...' : 'Изменить (🥴)'}
+          text={formik.isSubmitting ? 'Создание...' : 'Изменить'}
           type='submit'
           btnStyle='mediumGreen'
         ></Button>

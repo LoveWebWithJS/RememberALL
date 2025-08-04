@@ -40,10 +40,10 @@ export const DoEverythingPage = () => {
     return (
       <div className={css.DoEverythingPage}>
         <div className={css.tasksWrapper}>
-          <h2>
+          <h1 className={css.authorizathionAlert}>
             Пожалуйста, авторизуйтесь или войдите чтобы создавать задачи и
             видеть собственные задачи
-          </h2>
+          </h1>
         </div>
       </div>
     );

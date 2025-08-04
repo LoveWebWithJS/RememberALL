@@ -26,6 +26,11 @@
   .tasksWrapper {
     margin: 0 16px 0 18px;
     max-height: 100vh;
+    .authorizathionAlert {
+      padding: 20px;
+      @include h1;
+      font-weight: 500;
+    }
     .tasks {
       display: flex;
       flex-direction: column;

@@ -1,0 +1,72 @@
+@import '../../styles/_mixins.scss';
+@import '../../styles/_vars.scss';
+
+.EditTaskPage {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  .form {
+    background-color: $lightGreen;
+    border: $defaultBorder;
+    border-radius: $defaultCornerRadius;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    .nameWrapper {
+      display: flex;
+      flex-direction: column;
+      @include input;
+      label {
+        font-size: 42px;
+        margin-bottom: 15px;
+      }
+      input {
+        font-size: 2rem;
+        width: 80%;
+        height: 82px;
+        margin-bottom: 15px;
+      }
+    }
+    .textWrapper {
+      display: flex;
+      flex-direction: column;
+      @include textarea;
+      label {
+        font-size: 42px;
+        margin-bottom: 15px;
+      }
+      textarea {
+        font-size: 1.4rem;
+        overflow: auto;
+        &::-webkit-scrollbar {
+          background-color: $lightGreen;
+          border-radius: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: $mediumGreen;
+          border-radius: 10px;
+        }
+        width: 80%;
+        height: 200px;
+        margin-bottom: 15px;
+      }
+    }
+    .importanceWrapper {
+      @include fieldset;
+      width: 80%;
+      margin-bottom: 15px;
+      label {
+        font-size: 1.2rem;
+      }
+    }
+    button {
+      margin-top: 15px;
+    }
+  }
+}
