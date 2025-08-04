@@ -2,6 +2,16 @@ import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { setBtnStyle } from './setBtnStyle';
 
+export type ButtonProps = {
+  disabled?: boolean;
+  onClick?: () => void; //use function expression without returning value or you can use types union
+  text?: string;
+  width?: string;
+  btnStyle?: string;
+  children?: ReactNode;
+  type?: 'submit' | 'reset' | 'button' | undefined;
+};
+
 export const Button = ({
   disabled,
   onClick,
@@ -10,15 +20,7 @@ export const Button = ({
   btnStyle,
   children,
   type,
-}: {
-  disabled?: boolean;
-  onClick?: () => void; //use function expression without returning value or you can use types union
-  text?: string;
-  width?: string;
-  btnStyle?: string;
-  children?: ReactNode;
-  type?: 'submit' | 'reset' | 'button' | undefined;
-}) => {
+}: ButtonProps) => {
   return (
     <button
       disabled={disabled || false}

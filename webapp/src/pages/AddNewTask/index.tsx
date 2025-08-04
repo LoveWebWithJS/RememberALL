@@ -1,25 +1,24 @@
 import { Button } from '../../components/Button';
-import { useFormik } from 'formik';
 import css from './index.module.scss';
 import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';
 import { Fieldset } from '../../components/Fieldset/index.module';
-import { withZodSchema } from 'formik-validator-zod';
 import { trpc } from '../../lib/trpc';
 import { useNavigate } from 'react-router-dom';
 import { zCreateNewTaskTrpcInput } from '../../../../backend/src/router/createNewTask/input';
 import { getDoEverythingPageRoute } from '../../lib/routes';
+import { useForm } from '../../lib/form';
 export const AddNewTask = () => {
   const navigate = useNavigate();
   const createTask = trpc.createNewTask.useMutation();
-  const formik = useFormik({
+  const { formik } = useForm({
     initialValues: {
       name: '',
       text: '',
       importance: '0',
       solved: false,
     },
-    validate: withZodSchema(zCreateNewTaskTrpcInput),
+    validationSchema: zCreateNewTaskTrpcInput,
     onSubmit: async (values) => {
       await createTask.mutateAsync(values);
       navigate(getDoEverythingPageRoute());
@@ -37,7 +36,6 @@ export const AddNewTask = () => {
         className={css.form}
         onSubmit={(e) => {
           e.preventDefault();
-          formik.handleSubmit();
         }}
       >
         <Input

@@ -1,52 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from '../../components/Button';
-import { useFormik } from 'formik';
 import css from './index.module.scss';
 import Cookies from 'js-cookie';
 import { z } from 'zod';
 import { Input } from '../../components/Input';
-import { withZodSchema } from 'formik-validator-zod';
 import { trpc } from '../../lib/trpc';
 import { zSignUpTrpcInput } from '../../../../backend/src/router/signUp/input';
 import { getDoEverythingPageRoute, getSignInRoute } from '../../lib/routes';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useForm } from '../../lib/form';
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useUtils();
   const signUp = trpc.signUp.useMutation();
-  const [submittingError, setSubmittingError] = useState<string | null>(null);
-  const formik = useFormik({
+  const { formik } = useForm({
     initialValues: {
       nick: '',
       password: '',
       passwordAgain: '',
     },
-    validate: withZodSchema(
-      zSignUpTrpcInput
-        .extend({
-          passwordAgain: z.string().min(1),
-        })
-        .superRefine((val, ctx) => {
-          if (val.password !== val.passwordAgain) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: 'Пароли должны быть одинаковы',
-              path: ['passwordAgain'],
-            });
-          }
-        })
-    ),
+    validationSchema: zSignUpTrpcInput
+      .extend({
+        passwordAgain: z.string().min(1),
+      })
+      .superRefine((val, ctx) => {
+        if (val.password !== val.passwordAgain) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Пароли должны быть одинаковы',
+            path: ['passwordAgain'],
+          });
+        }
+      }),
     onSubmit: async (values) => {
-      try {
-        const { token } = await signUp.mutateAsync(values);
-        Cookies.set('token', token, { expires: 999 });
-        void trpcUtils.invalidate();
-        navigate(getDoEverythingPageRoute());
-      } catch (error: any) {
-        setSubmittingError(error.message);
-      }
+      const { token } = await signUp.mutateAsync(values);
+      Cookies.set('token', token, { expires: 999 });
+      void trpcUtils.invalidate();
+      navigate(getDoEverythingPageRoute());
     },
   });
   return (
@@ -57,7 +48,6 @@ export const SignUpPage = () => {
           className={css.form}
           onSubmit={(e) => {
             e.preventDefault();
-            setSubmittingError(null);
             formik.handleSubmit();
           }}
         >
@@ -84,11 +74,6 @@ export const SignUpPage = () => {
           <Link to={getSignInRoute()} className={css.SignUpLink}>
             <p>У вас уже есть аккаунт?</p>
           </Link>
-          {submittingError && (
-            <>
-              <br /> <span color='red'>{submittingError}</span>
-            </>
-          )}
           <Button
             disabled={formik.isSubmitting}
             width='80%'

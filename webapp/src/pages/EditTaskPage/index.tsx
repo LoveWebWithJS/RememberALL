@@ -6,15 +6,13 @@ import {
 } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 import type { TrpcRouterOutput } from '../../../../backend/src/router';
-import { useState } from 'react';
-import { useFormik } from 'formik';
 import { zUpdateTaskTrpcInput } from '../../../../backend/src/router/updateTask/input';
-import { withZodSchema } from 'formik-validator-zod';
 import { pick } from 'lodash';
 import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';
 import { Fieldset } from '../../components/Fieldset/index.module';
 import { Button } from '../../components/Button';
+import { useForm } from '../../lib/form';
 
 const EditTaskComponent = ({
   task,
@@ -22,20 +20,13 @@ const EditTaskComponent = ({
   task: NonNullable<TrpcRouterOutput['getTask']['task']>;
 }) => {
   const navigate = useNavigate();
-  const [, setSubmittingError] = useState<string | null>(null);
   const updateTask = trpc.updateTask.useMutation();
-  const formik = useFormik({
+  const { formik } = useForm({
     initialValues: pick(task, ['name', 'text', 'importance', 'solved']),
-    validate: withZodSchema(zUpdateTaskTrpcInput.omit({ taskId: true })),
+    validationSchema: zUpdateTaskTrpcInput.omit({ taskId: true }),
     onSubmit: async (values) => {
-      try {
-        setSubmittingError(null);
-        await updateTask.mutateAsync({ taskId: task.id, ...values });
-        navigate(getDoEverythingPageRoute());
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
-        setSubmittingError(error.message);
-      }
+      await updateTask.mutateAsync({ taskId: task.id, ...values });
+      navigate(getDoEverythingPageRoute());
     },
   });
   const importancesArr = [
