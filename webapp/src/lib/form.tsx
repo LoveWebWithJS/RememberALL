@@ -1,13 +1,15 @@
 import { type FormikHelpers, useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { type z } from 'zod';
-// import { type ButtonProps } from '../components/Button';
+import { type AlertProps } from '../components/Alert';
 
 export const useForm = <TZodSchema extends z.ZodTypeAny>({
+  successMessage = false,
   resetOnSuccess = true,
   initialValues = {},
   validationSchema,
+  showValidationAlert = false,
   onSubmit,
 }: {
   successMessage?: string | false;
@@ -20,7 +22,8 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
     actions: FormikHelpers<z.infer<TZodSchema>>
   ) => Promise<any> | any;
 }) => {
-  const [, setSubmittingError] = useState<Error | null>(null);
+  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+  const [submittingError, setSubmittingError] = useState<Error | null>(null);
 
   const formik = useFormik<z.infer<TZodSchema>>({
     initialValues,
@@ -32,12 +35,52 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
         if (resetOnSuccess) {
           formik.resetForm();
         }
+        setSuccessMessageVisible(true);
+        setTimeout(() => {
+          setSuccessMessageVisible(false);
+        }, 3000);
       } catch (error: any) {
         setSubmittingError(error);
       }
     },
   });
+  const alertProps = useMemo<AlertProps>(() => {
+    if (submittingError) {
+      return {
+        hidden: false,
+        children: submittingError.message,
+        color: 'red',
+      };
+    }
+    if (showValidationAlert && !formik.isValid && !!formik.submitCount) {
+      return {
+        hidden: false,
+        children: 'Some fields are invalid',
+        color: 'red',
+      };
+    }
+    if (successMessageVisible && successMessage) {
+      return {
+        hidden: false,
+        children: successMessage,
+        color: 'green',
+      };
+    }
+    return {
+      color: 'red',
+      hidden: true,
+      children: null,
+    };
+  }, [
+    submittingError,
+    formik.isValid,
+    formik.submitCount,
+    successMessageVisible,
+    successMessage,
+    showValidationAlert,
+  ]);
   return {
     formik,
+    alertProps,
   };
 };

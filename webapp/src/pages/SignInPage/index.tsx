@@ -7,12 +7,13 @@ import { zSignInTrpcInput } from '../../../../backend/src/router/signIn/input';
 import { getDoEverythingPageRoute, getSignUpRoute } from '../../lib/routes';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from '../../lib/form';
+import { Alert } from '../../components/Alert';
 
 export const SignInPage = () => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useUtils();
   const signUp = trpc.signIn.useMutation();
-  const { formik } = useForm({
+  const { formik, alertProps } = useForm({
     initialValues: {
       nick: '',
       password: '',
@@ -24,6 +25,7 @@ export const SignInPage = () => {
       void trpcUtils.invalidate();
       navigate(getDoEverythingPageRoute());
     },
+    showValidationAlert: true,
   });
   return (
     <div className={css.LogInWrapper}>
@@ -52,6 +54,7 @@ export const SignInPage = () => {
           <Link to={getSignUpRoute()} className={css.SignInLink}>
             У вас ещё нет аккаунта?
           </Link>
+          <Alert {...alertProps}></Alert>
           <Button
             disabled={formik.isSubmitting}
             width='80%'

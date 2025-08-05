@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { zCreateNewTaskTrpcInput } from '../../../../backend/src/router/createNewTask/input';
 import { getDoEverythingPageRoute } from '../../lib/routes';
 import { useForm } from '../../lib/form';
+import { Alert } from '../../components/Alert';
 export const AddNewTask = () => {
   const navigate = useNavigate();
   const createTask = trpc.createNewTask.useMutation();
-  const { formik } = useForm({
+  const { formik, alertProps } = useForm({
     initialValues: {
       name: '',
       text: '',
@@ -23,6 +24,7 @@ export const AddNewTask = () => {
       await createTask.mutateAsync(values);
       navigate(getDoEverythingPageRoute());
     },
+    showValidationAlert: true,
   });
   const importancesArr = [
     { name: 'Крайне важная', value: '3' },
@@ -36,6 +38,7 @@ export const AddNewTask = () => {
         className={css.form}
         onSubmit={(e) => {
           e.preventDefault();
+          formik.handleSubmit();
         }}
       >
         <Input
@@ -59,6 +62,7 @@ export const AddNewTask = () => {
           inputsArr={importancesArr}
           formik={formik}
         />
+        <Alert {...alertProps}></Alert>
         <Button
           disabled={formik.isSubmitting}
           width='80%'

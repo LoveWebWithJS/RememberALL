@@ -13,6 +13,7 @@ import { Textarea } from '../../components/Textarea';
 import { Fieldset } from '../../components/Fieldset/index.module';
 import { Button } from '../../components/Button';
 import { useForm } from '../../lib/form';
+import { Alert } from '../../components/Alert';
 
 const EditTaskComponent = ({
   task,
@@ -21,13 +22,14 @@ const EditTaskComponent = ({
 }) => {
   const navigate = useNavigate();
   const updateTask = trpc.updateTask.useMutation();
-  const { formik } = useForm({
+  const { formik, alertProps } = useForm({
     initialValues: pick(task, ['name', 'text', 'importance', 'solved']),
     validationSchema: zUpdateTaskTrpcInput.omit({ taskId: true }),
     onSubmit: async (values) => {
       await updateTask.mutateAsync({ taskId: task.id, ...values });
       navigate(getDoEverythingPageRoute());
     },
+    showValidationAlert: true,
   });
   const importancesArr = [
     { name: 'Крайне важная', value: '3' },
@@ -65,6 +67,7 @@ const EditTaskComponent = ({
           inputsArr={importancesArr}
           formik={formik}
         />
+        <Alert {...alertProps}></Alert>
         <Button
           disabled={formik.isSubmitting}
           width='80%'
