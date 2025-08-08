@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import css from './index.module.scss';
+import { setAlertStyle } from './setAlertStyle';
 
 export type AlertProps = {
   color: 'green' | 'blue' | 'red';
@@ -13,8 +13,6 @@ export const Alert = ({ color, children, innerText, hidden }: AlertProps) => {
     return null;
   }
   return (
-    <div className={`${css.alertWrapper} ${css.color}`}>
-      {children || <p>{innerText}</p>}
-    </div>
+    <div className={setAlertStyle(color)}>{children || <p>{innerText}</p>}</div>
   );
 };
