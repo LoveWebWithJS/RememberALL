@@ -8,6 +8,7 @@ import { getTaskTrpcRoute } from './getTask';
 import { getTasksTrpcRoute } from './getTasks';
 import { signInTrpcRoute } from './signIn';
 import { signUpTrpcRoute } from './signUp';
+import { updateSolvedStateTaskTrpcRoute } from './updateSolvedStateTask';
 import { updateTaskTrpcRoute } from './updateTask';
 // @endindex
 
@@ -19,6 +20,7 @@ export const trpcRouter = trpc.router({
   getTasks: getTasksTrpcRoute,
   signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
+  updateSolvedStateTask: updateSolvedStateTaskTrpcRoute,
   updateTask: updateTaskTrpcRoute,
   // @endindex
 });
