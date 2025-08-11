@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import css from './index.module.scss';
 import { LinkButton } from '../Button';
-// import { trpc } from '../../lib/trpc';
 
 interface TaskProps {
   result: {
@@ -14,8 +13,6 @@ interface TaskProps {
 }
 
 export const Task: React.FC<TaskProps> = (props) => {
-  // const getMeResult = trpc.getMe.useQuery();
-  // const getSolvedResult = trpc.updateSolvedStateTask.useMutation()
   const { name, solved, text, importance, id } = props.result;
   const [solvedState, setSolvedState] = useState(solved);
   const setImportanceStyle = () => {
@@ -73,14 +70,12 @@ export const Task: React.FC<TaskProps> = (props) => {
         </h3>
         <span className={css.taskText}>{text}</span>
       </li>
-      {/* <div className={css.editButtonWrapper}> */}
       <LinkButton
         to={`/task/${id}/edit`}
         text='Редактировать'
         btnStyle='mediumGreen'
         className={css.editButton}
       />
-      {/* </div> */}
     </div>
   );
 };

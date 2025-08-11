@@ -1,6 +1,7 @@
 import { trpc } from '../../lib/trpc';
 import css from './index.module.scss';
 import { Task } from '../../components/Task';
+import { useMe } from '../../lib/ctx';
 
 interface TaskBackend {
   name: string;
@@ -11,17 +12,12 @@ interface TaskBackend {
 }
 
 export const DoEverythingPage = () => {
-  const getMeResult = trpc.getMe.useQuery();
+  const me = useMe();
   const getTasksResult = trpc.getTasks.useQuery({
-    userId: getMeResult.data?.me?.id || 'a',
+    userId: me?.id || 'a',
   });
 
-  if (
-    getTasksResult.isLoading ||
-    getTasksResult.isFetching ||
-    getMeResult.isLoading ||
-    getMeResult.isFetching
-  ) {
+  if (getTasksResult.isLoading || getTasksResult.isFetching) {
     return <span>Loading...</span>;
   }
 
@@ -36,7 +32,7 @@ export const DoEverythingPage = () => {
   getTasksResult.data.tasks.sort((a: TaskBackend, b: TaskBackend) =>
     a.importance < b.importance ? 1 : -1
   );
-  if (getMeResult.data?.me?.id == undefined) {
+  if (me == null) {
     return (
       <div className={css.DoEverythingPage}>
         <div className={css.tasksWrapper}>

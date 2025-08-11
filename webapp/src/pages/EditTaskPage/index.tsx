@@ -14,6 +14,7 @@ import { Fieldset } from '../../components/Fieldset/index.module';
 import { Button } from '../../components/Button';
 import { useForm } from '../../lib/form';
 import { Alert } from '../../components/Alert';
+import { useMe } from '../../lib/ctx';
 
 const EditTaskComponent = ({
   task,
@@ -81,31 +82,22 @@ const EditTaskComponent = ({
 };
 
 export const EditTaskPage = () => {
-  const getMeResult = trpc.getMe.useQuery();
+  const me = useMe();
   const { id } = useParams() as EditTaskRouteParams;
   const getTaskResult = trpc.getTask.useQuery({
-    userId: getMeResult.data?.me?.id || 'a',
+    userId: me?.id || 'a',
     id: id,
   });
   console.log('Edit task page yoo');
-  if (
-    getTaskResult.isLoading ||
-    getTaskResult.isFetching ||
-    getMeResult.isLoading ||
-    getMeResult.isFetching
-  ) {
+  if (getTaskResult.isLoading || getTaskResult.isFetching) {
     return <span>Loading... Please wait...</span>;
   }
   if (getTaskResult.isError) {
     return <span>Error: {getTaskResult.error.message}</span>;
   }
-  if (getMeResult.isError) {
-    return <span>Error: {getMeResult.error.message}</span>;
-  }
   if (!getTaskResult.data?.task) {
     return <span>Task not found</span>;
   }
-  const me = getMeResult?.data?.me;
   if (!me) {
     return <span>Only for authorized</span>;
   }

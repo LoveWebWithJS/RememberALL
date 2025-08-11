@@ -8,10 +8,11 @@ import {
 } from '../../../lib/routes';
 import { Button, LinkButton } from '../../Button';
 import css from './index.module.scss';
-import { trpc } from '../../../lib/trpc';
+// import { trpc } from '../../../lib/trpc';
+import { useMe } from '../../../lib/ctx';
 
 export const Layout = () => {
-  const { data, isLoading, isFetching, isError } = trpc.getMe.useQuery();
+  const me = useMe();
   return (
     <div className={css.layout}>
       <header className={css.header}>
@@ -69,7 +70,7 @@ export const Layout = () => {
               console.log('clicked!');
             }}
           ></Button>
-          {isLoading || isFetching || isError ? null : data?.me ? (
+          {me ? (
             <>
               <LinkButton
                 to={getSignOutRoute()}
@@ -94,7 +95,7 @@ export const Layout = () => {
         </div>
       </nav>
       <div className={css.actionBar}>
-        {isLoading || isFetching || isError ? null : data?.me ? (
+        {me == null ? null : me ? (
           <>
             <LinkButton
               to={getAddNewTaskRoute()}
