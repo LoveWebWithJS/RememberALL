@@ -8,8 +8,9 @@ import { getDoEverythingPageRoute, getSignUpRoute } from '../../lib/routes';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from '../../lib/form';
 import { Alert } from '../../components/Alert';
+import { withPageWrapper } from '../../lib/pageWrapper';
 
-export const SignInPage = () => {
+export const SignInPage = withPageWrapper({})(() => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useUtils();
   const signUp = trpc.signIn.useMutation();
@@ -66,4 +67,4 @@ export const SignInPage = () => {
       </div>
     </div>
   );
-};
+});

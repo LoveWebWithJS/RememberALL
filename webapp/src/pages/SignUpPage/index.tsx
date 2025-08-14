@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from '../../components/Button';
 import css from './index.module.scss';
 import Cookies from 'js-cookie';
@@ -10,8 +9,9 @@ import { getDoEverythingPageRoute, getSignInRoute } from '../../lib/routes';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from '../../lib/form';
 import { Alert } from '../../components/Alert';
+import { withPageWrapper } from '../../lib/pageWrapper';
 
-export const SignUpPage = () => {
+export const SignUpPage = withPageWrapper({})(() => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useUtils();
   const signUp = trpc.signUp.useMutation();
@@ -88,4 +88,4 @@ export const SignUpPage = () => {
       </div>
     </div>
   );
-};
+});

@@ -2,6 +2,7 @@ import { trpc } from '../../lib/trpc';
 import css from './index.module.scss';
 import { Task } from '../../components/Task';
 import { useMe } from '../../lib/ctx';
+import { withPageWrapper } from '../../lib/pageWrapper';
 
 interface TaskBackend {
   name: string;
@@ -11,25 +12,24 @@ interface TaskBackend {
   importance: string;
 }
 
-export const DoEverythingPage = () => {
-  const me = useMe();
-  const getTasksResult = trpc.getTasks.useQuery({
-    userId: me?.id || 'a',
-  });
-
-  if (getTasksResult.isLoading || getTasksResult.isFetching) {
-    return <span>Loading...</span>;
-  }
-
-  if (getTasksResult.isError) {
-    return <span>Error: {getTasksResult.error.message}</span>;
-  }
-  if (getTasksResult.data === undefined) {
-    console.error('Requaired data is undefined');
-    return <p>Requaired data is undefined. Something went wrong</p>;
-  }
-
-  getTasksResult.data.tasks.sort((a: TaskBackend, b: TaskBackend) =>
+export const DoEverythingPage = withPageWrapper({
+  // authorizedOnly: true,
+  useQuery: () => {
+    const me = useMe();
+    return trpc.getTasks.useQuery({
+      userId: me?.id || '0',
+    });
+  },
+  setProps: ({ queryResult, checkExists }) => {
+    const me = useMe();
+    const tasks = checkExists(
+      queryResult.data?.tasks,
+      'Tasks not found (something went wrong)'
+    );
+    return { tasks, me };
+  },
+})(({ tasks, me }) => {
+  tasks.sort((a: TaskBackend, b: TaskBackend) =>
     a.importance < b.importance ? 1 : -1
   );
   if (me == null) {
@@ -51,11 +51,11 @@ export const DoEverythingPage = () => {
       </div>
       <div className={css.tasksWrapper}>
         <ul className={css.tasks}>
-          {getTasksResult.data.tasks.map((task: TaskBackend, i: number) => (
-            <Task key={task.id} result={getTasksResult.data.tasks[i]} />
+          {tasks.map((task: TaskBackend, i: number) => (
+            <Task key={task.id} result={tasks[i]} />
           ))}
         </ul>
       </div>
     </div>
   );
-};
+});

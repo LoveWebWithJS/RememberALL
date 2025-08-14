@@ -9,7 +9,10 @@ import { zCreateNewTaskTrpcInput } from '../../../../backend/src/router/createNe
 import { getDoEverythingPageRoute } from '../../lib/routes';
 import { useForm } from '../../lib/form';
 import { Alert } from '../../components/Alert';
-export const AddNewTask = () => {
+import { withPageWrapper } from '../../lib/pageWrapper';
+export const AddNewTask = withPageWrapper({
+  authorizedOnly: true,
+})(() => {
   const navigate = useNavigate();
   const createTask = trpc.createNewTask.useMutation();
   const { formik, alertProps } = useForm({
@@ -73,4 +76,4 @@ export const AddNewTask = () => {
       </form>
     </div>
   );
-};
+});

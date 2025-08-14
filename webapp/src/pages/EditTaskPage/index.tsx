@@ -22,15 +22,10 @@ export const EditTaskPage = withPageWrapper({
     const me = useMe();
     const { id } = useParams() as EditTaskRouteParams;
     return trpc.getTask.useQuery({
-      userId: me?.id || 'a',
+      userId: me?.id || '0',
       id: id,
     });
   },
-  // checkExists: ({ queryResult }) => !!queryResult?.data?.task, // old realization
-  // checkExistsMessage: 'Task not found',
-  // checkAccess: ({ queryResult, ctx }) =>
-  //   !!ctx.me && ctx.me.id === queryResult.data?.task?.userId,
-  // checkAccessMessage: 'No permission',
   setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
     const task = checkExists(queryResult.data?.task, 'Task not found');
     checkAccess(ctx.me?.id === task.userId, 'No permission');
