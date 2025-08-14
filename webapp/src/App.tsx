@@ -21,6 +21,7 @@ import { SignInPage } from './pages/SignInPage';
 import { SignOutPage } from './pages/SignOutPage';
 import { EditTaskPage } from './pages/EditTaskPage';
 import { AppContextProvider } from './lib/ctx';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App = () => {
   return (
@@ -44,6 +45,7 @@ export const App = () => {
               <Route path={getSettingsPageRoute()} element={<SettingsPage />} />
               <Route path={getSignUpRoute()} element={<SignUpPage />} />
               <Route path={getSignInRoute()} element={<SignInPage />} />
+              <Route path='*' element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

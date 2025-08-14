@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getDoEverythingPageRoute } from './routes';
 import { ErrorPageComponent } from '../components/ErrorPageComponent';
+import { NotFoundPage } from '../pages/NotFoundPage';
 
 class CheckExistsError extends Error {}
 const checkExistsFn = <T,>(value: T, message?: string): NonNullable<T> => {
@@ -130,10 +131,7 @@ const PageWrapper = <
     const notExists = !checkExists(helperProps);
     if (notExists) {
       return (
-        <ErrorPageComponent
-          message={checkExistsMessage}
-          title={checkExistsTitle}
-        />
+        <NotFoundPage message={checkExistsMessage} title={checkExistsTitle} />
       );
     }
   }
@@ -148,7 +146,7 @@ const PageWrapper = <
   } catch (error) {
     if (error instanceof CheckExistsError) {
       return (
-        <ErrorPageComponent
+        <NotFoundPage
           title={checkExistsTitle}
           message={error.message || checkExistsMessage}
         />
