@@ -5,7 +5,6 @@ import {
   type EditTaskRouteParams,
 } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
-import type { TrpcRouterOutput } from '../../../../backend/src/router';
 import { zUpdateTaskTrpcInput } from '../../../../backend/src/router/updateTask/input';
 import { pick } from 'lodash';
 import { Input } from '../../components/Input';
@@ -17,99 +16,6 @@ import { Alert } from '../../components/Alert';
 import { useMe } from '../../lib/ctx';
 import { withPageWrapper } from '../../lib/pageWrapper';
 
-// const EditTaskComponent = ({
-//   task,
-// }: {
-//   task: NonNullable<TrpcRouterOutput['getTask']['task']>;
-// }) => {
-//   const navigate = useNavigate();
-//   const updateTask = trpc.updateTask.useMutation();
-//   const { formik, alertProps } = useForm({
-//     initialValues: pick(task, ['name', 'text', 'importance', 'solved']),
-//     validationSchema: zUpdateTaskTrpcInput.omit({ taskId: true }),
-//     onSubmit: async (values) => {
-//       await updateTask.mutateAsync({ taskId: task.id, ...values });
-//       navigate(getDoEverythingPageRoute());
-//     },
-//     showValidationAlert: true,
-//   });
-//   const importancesArr = [
-//     { name: 'Крайне важная', value: '3' },
-//     { name: 'Важная', value: '2' },
-//     { name: 'Обычная', value: '1' },
-//     { name: 'Не важная', value: '0' },
-//   ];
-//   return (
-//     <div className={css.EditTaskPage}>
-//       <form
-//         className={css.form}
-//         onSubmit={(e) => {
-//           e.preventDefault();
-//           formik.handleSubmit();
-//         }}
-//       >
-//         <Input
-//           labelText='Название'
-//           name='name'
-//           className={css.nameWrapper}
-//           formik={formik}
-//           placeholder='Как бы Вы назвали эту задачу?'
-//         />
-//         <Textarea
-//           labelText='Текст'
-//           name='text'
-//           className={css.textWrapper}
-//           formik={formik}
-//           placeholder='Как бы Вы описали эту задачу?'
-//         />
-//         <Fieldset
-//           legend='Важность задачи'
-//           name='importance'
-//           className={css.importanceWrapper}
-//           inputsArr={importancesArr}
-//           formik={formik}
-//         />
-//         <Alert {...alertProps}></Alert>
-//         <Button
-//           disabled={formik.isSubmitting}
-//           width='80%'
-//           text={formik.isSubmitting ? 'Создание...' : 'Изменить'}
-//           type='submit'
-//           btnStyle='mediumGreen'
-//         ></Button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export const EditTaskPage = () => {
-//   const me = useMe();
-//   const { id } = useParams() as EditTaskRouteParams;
-//   const getTaskResult = trpc.getTask.useQuery({
-//     userId: me?.id || 'a',
-//     id: id,
-//   });
-//   console.log('Edit task page yoo');
-//   if (getTaskResult.isLoading || getTaskResult.isFetching) {
-//     return <span>Loading... Please wait...</span>;
-//   }
-//   if (getTaskResult.isError) {
-//     return <span>Error: {getTaskResult.error.message}</span>;
-//   }
-//   if (!getTaskResult.data?.task) {
-//     return <span>Task not found</span>;
-//   }
-//   if (!me) {
-//     return <span>Only for authorized</span>;
-//   }
-//   const task = getTaskResult.data.task;
-//   if (me.id !== task.userId) {
-//     return <span>No permissions</span>;
-//   }
-
-//   return <EditTaskComponent task={task} />;
-// };
-
 export const EditTaskPage = withPageWrapper({
   authorizedOnly: true,
   useQuery: () => {
@@ -120,14 +26,16 @@ export const EditTaskPage = withPageWrapper({
       id: id,
     });
   },
-  checkExists: ({ queryResult }) => !!queryResult?.data?.task,
-  checkExistsMessage: 'Task not found',
-  checkAccess: ({ queryResult, ctx }) =>
-    !!ctx.me && ctx.me.id === queryResult?.data?.task?.userId,
-  checkAccessMessage: 'No permission',
-  setProps: ({ queryResult }) => ({
-    task: queryResult?.data?.task!,
-  }),
+  // checkExists: ({ queryResult }) => !!queryResult?.data?.task, // old realization
+  // checkExistsMessage: 'Task not found',
+  // checkAccess: ({ queryResult, ctx }) =>
+  //   !!ctx.me && ctx.me.id === queryResult.data?.task?.userId,
+  // checkAccessMessage: 'No permission',
+  setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
+    const task = checkExists(queryResult.data?.task, 'Task not found');
+    checkAccess(ctx.me?.id === task.userId, 'No permission');
+    return { task };
+  },
 })(({ task }) => {
   const navigate = useNavigate();
   const updateTask = trpc.updateTask.useMutation();

@@ -6,12 +6,34 @@ import { useEffect } from 'react';
 import { getDoEverythingPageRoute } from './routes';
 import { ErrorPageComponent } from '../components/ErrorPageComponent';
 
+class CheckExistsError extends Error {}
+const checkExistsFn = <T,>(value: T, message?: string): NonNullable<T> => {
+  if (!value) {
+    throw new CheckExistsError(message);
+  }
+  return value;
+};
+
+class CheckAccessError extends Error {}
+const checkAccessFn = <T,>(value: T, message?: string): void => {
+  if (!value) {
+    throw new CheckAccessError(message);
+  }
+};
+
 type Props = Record<string, any>;
 type QueryResult = UseTRPCQueryResult<any, any>;
 type QuerySuccessResult<TQueryResult extends QueryResult> = UseTRPCQueryResult<
   NonNullable<TQueryResult['data']>,
   null
 >;
+
+type SetPropsProps<TQueryResult extends QueryResult | undefined> =
+  HelperProps<TQueryResult> & {
+    checkExists: typeof checkExistsFn;
+    checkAccess: typeof checkAccessFn;
+  };
+
 type HelperProps<TQueryResult extends QueryResult | undefined> = {
   ctx: AppContext;
   queryResult: TQueryResult extends QueryResult
@@ -39,7 +61,7 @@ type PageWrapperProps<
 
   useQuery?: () => TQueryResult;
 
-  setProps?: (helperProps: HelperProps<TQueryResult>) => TProps;
+  setProps?: (setPropsProps: SetPropsProps<TQueryResult>) => TProps;
   Page: React.FC<TProps>;
 };
 
@@ -116,8 +138,32 @@ const PageWrapper = <
     }
   }
 
-  const props = setProps?.(helperProps) as TProps;
-  return <Page {...props} />;
+  try {
+    const props = setProps?.({
+      ...helperProps,
+      checkExists: checkExistsFn,
+      checkAccess: checkAccessFn,
+    }) as TProps;
+    return <Page {...props} />;
+  } catch (error) {
+    if (error instanceof CheckExistsError) {
+      return (
+        <ErrorPageComponent
+          title={checkExistsTitle}
+          message={error.message || checkExistsMessage}
+        />
+      );
+    }
+    if (error instanceof CheckAccessError) {
+      return (
+        <ErrorPageComponent
+          title={checkAccessTitle}
+          message={error.message || checkAccessMessage}
+        />
+      );
+    }
+    throw error;
+  }
 };
 
 //
