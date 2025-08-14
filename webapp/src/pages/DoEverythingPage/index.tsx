@@ -4,13 +4,13 @@ import { Task } from '../../components/Task';
 import { useMe } from '../../lib/ctx';
 import { withPageWrapper } from '../../lib/pageWrapper';
 
-interface TaskBackend {
+type TaskBackend = {
   name: string;
   solved: boolean;
   id: string;
   text: string;
   importance: string;
-}
+};
 
 export const DoEverythingPage = withPageWrapper({
   // authorizedOnly: true,
@@ -20,8 +20,8 @@ export const DoEverythingPage = withPageWrapper({
       userId: me?.id || '0',
     });
   },
-  setProps: ({ queryResult, checkExists }) => {
-    const me = useMe();
+  setProps: ({ queryResult, checkExists, ctx }) => {
+    const me = ctx.me;
     const tasks = checkExists(
       queryResult.data?.tasks,
       'Tasks not found (something went wrong)'
