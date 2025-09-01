@@ -6,6 +6,7 @@ import { createNewTaskTrpcRoute } from './createNewTask';
 import { getMeTrpcRoute } from './getMe';
 import { getTaskTrpcRoute } from './getTask';
 import { getTasksTrpcRoute } from './getTasks';
+import { getTestTrpcRoute } from './getTest';
 import { signInTrpcRoute } from './signIn';
 import { signUpTrpcRoute } from './signUp';
 import { updateSolvedStateTaskTrpcRoute } from './updateSolvedStateTask';
@@ -18,6 +19,7 @@ export const trpcRouter = trpc.router({
   getMe: getMeTrpcRoute,
   getTask: getTaskTrpcRoute,
   getTasks: getTasksTrpcRoute,
+  getTest: getTestTrpcRoute,
   signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
   updateSolvedStateTask: updateSolvedStateTaskTrpcRoute,
