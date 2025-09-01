@@ -1,4 +1,4 @@
-![Logo. The clock](./webapp/src/assets/logo.png)
+![Logo. The green clock](./webapp/src/assets/logo.png)
 
 # RememberALL
 
